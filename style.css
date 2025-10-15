@@ -53,11 +53,14 @@ body {
 .sidebar-ad {
     position: fixed;
     top: 100px;
+    bottom: 100px; /* Stop before footer */
     width: 160px;
-    height: 600px;
+    height: auto;
+    max-height: 600px;
     z-index: 999;
     display: none; /* Hidden on mobile by default */
     pointer-events: none; /* Allow clicking through the container */
+    transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 .sidebar-ad-left {
@@ -66,6 +69,12 @@ body {
 
 .sidebar-ad-right {
     right: 10px;
+}
+
+/* Hide ads when CTA or footer is in viewport */
+.cta-section ~ .sidebar-ad,
+footer ~ .sidebar-ad {
+    display: none;
 }
 
 .ad-placeholder-vertical {
@@ -85,6 +94,7 @@ body {
     padding: 1rem;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     pointer-events: auto; /* Re-enable clicking on the ad itself */
+    transition: opacity 0.3s ease;
 }
 
 /* Show sidebar ads on larger screens - NO BODY PADDING */
@@ -531,19 +541,19 @@ html {
    Features Section
    =========================== */
 .features-section {
-    padding: 100px 20px;
+    padding: 80px 20px;
     background: var(--bg-white);
 }
 
 .section-header {
     text-align: center;
-    margin-bottom: 60px;
+    margin-bottom: 48px;
 }
 
 .section-header h2 {
     font-size: 2.5rem;
     font-weight: 700;
-    margin-bottom: 16px;
+    margin-bottom: 12px;
     color: var(--text-dark);
 }
 
@@ -555,12 +565,13 @@ html {
 .features-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 32px;
-    margin-bottom: 60px;
+    gap: 28px;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .feature-card {
-    padding: 32px;
+    padding: 28px 24px;
     background: white;
     border: 1px solid var(--border-color);
     border-radius: 12px;
@@ -574,38 +585,39 @@ html {
 }
 
 .feature-icon {
-    width: 60px;
-    height: 60px;
+    width: 56px;
+    height: 56px;
     background: linear-gradient(135deg, rgba(255, 107, 53, 0.1) 0%, rgba(255, 107, 53, 0.05) 100%);
     border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 20px;
+    margin-bottom: 16px;
 }
 
 .feature-icon svg {
-    width: 30px;
-    height: 30px;
+    width: 28px;
+    height: 28px;
     color: var(--primary-orange);
 }
 
 .feature-card h3 {
-    font-size: 1.4rem;
-    margin-bottom: 12px;
+    font-size: 1.3rem;
+    margin-bottom: 10px;
     color: var(--text-dark);
 }
 
 .feature-card p {
     color: var(--text-medium);
-    line-height: 1.7;
+    line-height: 1.6;
+    font-size: 0.95rem;
 }
 
 /* ===========================
    How It Works Section
    =========================== */
 .how-section {
-    padding: 100px 20px;
+    padding: 80px 20px;
     background: var(--bg-light);
 }
 
@@ -613,19 +625,23 @@ html {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     gap: 20px;
-    align-items: center;
+    align-items: stretch; /* Equal heights */
     max-width: 1200px;
     margin: 0 auto;
 }
 
 .step-card {
     background: white;
-    padding: 32px;
+    padding: 32px 24px;
     border-radius: 12px;
     text-align: center;
     box-shadow: var(--shadow-md);
     position: relative;
     transition: transform var(--transition-normal);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 300px; /* Ensure minimum height */
 }
 
 .step-card:hover {
@@ -693,7 +709,7 @@ html {
    CTA Section
    =========================== */
 .cta-section {
-    padding: 100px 20px;
+    padding: 80px 20px;
     background: linear-gradient(135deg, #FF6B35 0%, #F59E0B 50%, #FF6B35 100%);
     color: white;
     text-align: center;
@@ -939,13 +955,31 @@ footer {
    Use Case Selection Page
    =========================== */
 #use-case-page {
-    background: var(--bg-light);
+    background: linear-gradient(135deg, #FFF5F2 0%, #FFF 50%, #F0F9FF 100%);
     min-height: 100vh;
+    padding: 60px 0;
 }
 
 .use-case-container {
-    padding: 80px 0 60px;
-    min-height: calc(100vh - 80px);
+    padding: 40px 0 60px;
+    min-height: calc(100vh - 120px);
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 48px;
+}
+
+.section-header h2 {
+    font-size: 2.5rem;
+    color: var(--text-dark);
+    margin-bottom: 16px;
+    font-weight: 700;
+}
+
+.section-header p {
+    font-size: 1.2rem;
+    color: var(--text-medium);
 }
 
 .use-case-grid {
@@ -954,18 +988,22 @@ footer {
     gap: 24px;
     margin-top: 48px;
     margin-bottom: 48px;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .use-case-card {
     background: white;
-    border: 2px solid var(--border-color);
+    border: 2px solid transparent;
     border-radius: 16px;
-    padding: 32px 24px;
+    padding: 36px 28px;
     text-align: center;
     cursor: pointer;
     transition: all var(--transition-normal);
     position: relative;
     overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }
 
 .use-case-card::before {
@@ -983,9 +1021,9 @@ footer {
 .use-case-card:hover {
     border-color: currentColor;
     transform: translateY(-8px);
-    box-shadow: var(--shadow-xl);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+    background: linear-gradient(135deg, white 0%, rgba(255, 255, 255, 0.95) 100%);
 }
-
 .use-case-card:hover::before {
     transform: scaleX(1);
 }
