@@ -9,7 +9,8 @@ const AppState = {
     selectedUseCase: null,
     currentQuestionIndex: 0,
     answers: {},
-    currentQuestions: []
+    currentQuestions: [],
+    generatedJSON: null
 };
 
 // Initialize application
@@ -391,10 +392,10 @@ function generateJSON() {
 
 function displayResults(jsonString) {
     const jsonOutput = document.getElementById('json-output');
-    jsonOutput.value = jsonString;
+    jsonOutput.textContent = jsonString;
     
-    // Syntax highlight
-    highlightJSON(jsonOutput);
+    // Store in AppState for copy/download
+    AppState.generatedJSON = jsonString;
     
     // Show results page
     showResultsPage();
@@ -410,45 +411,58 @@ function highlightJSON(element) {
 // ===========================
 
 function copyToClipboard() {
-    const jsonOutput = document.getElementById('json-output');
-    jsonOutput.select();
-    jsonOutput.setSelectionRange(0, 99999);
+    const jsonText = AppState.generatedJSON || document.getElementById('json-output').textContent;
     
-    navigator.clipboard.writeText(jsonOutput.value).then(() => {
+    navigator.clipboard.writeText(jsonText).then(() => {
         showCopySuccess();
-    }).catch(() => {
-        document.execCommand('copy');
-        showCopySuccess();
+    }).catch((err) => {
+        // Fallback for older browsers
+        const textArea = document.createElement('textarea');
+        textArea.value = jsonText;
+        textArea.style.position = 'fixed';
+        textArea.style.opacity = '0';
+        document.body.appendChild(textArea);
+        textArea.select();
+        try {
+            document.execCommand('copy');
+            showCopySuccess();
+        } catch (e) {
+            alert('Failed to copy. Please select and copy manually.');
+        }
+        document.body.removeChild(textArea);
     });
 }
 
 function showCopySuccess() {
-    const copyBtn = document.getElementById('copy-btn');
-    const originalHTML = copyBtn.innerHTML;
+    const copyIcon = document.getElementById('copy-icon');
+    if (!copyIcon) return;
     
-    copyBtn.innerHTML = `
-        <i data-lucide="check-circle"></i>
-        <span>Copied!</span>
-    `;
-    copyBtn.style.backgroundColor = '#10B981';
+    const originalIcon = copyIcon.outerHTML;
+    copyIcon.parentElement.innerHTML = '<i data-lucide="check-circle"></i>';
+    
+    if (typeof lucide !== 'undefined') {
+        lucide.createIcons();
+    }
     
     setTimeout(() => {
-        copyBtn.innerHTML = originalHTML;
-        copyBtn.style.backgroundColor = '';
-        if (typeof lucide !== 'undefined') {
-            lucide.createIcons();
+        const btn = copyIcon.parentElement;
+        if (btn) {
+            btn.innerHTML = originalIcon;
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
         }
     }, 2000);
 }
 
 function downloadJSON() {
-    const jsonOutput = document.getElementById('json-output');
-    const blob = new Blob([jsonOutput.value], { type: 'application/json' });
+    const jsonText = AppState.generatedJSON || document.getElementById('json-output').textContent;
+    const blob = new Blob([jsonText], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     
     const timestamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, -5);
-    const useCaseName = AppState.selectedUseCase.replace('-', '_');
+    const useCaseName = AppState.selectedUseCase.replace(/-/g, '_');
     link.download = `jrompt_${useCaseName}_${timestamp}.json`;
     link.href = url;
     
@@ -456,23 +470,6 @@ function downloadJSON() {
     link.click();
     document.body.removeChild(link);
     URL.revokeObjectURL(url);
-    
-    const downloadBtn = document.getElementById('download-btn');
-    const originalHTML = downloadBtn.innerHTML;
-    
-    downloadBtn.innerHTML = `
-        <i data-lucide="check-circle"></i>
-        <span>Downloaded!</span>
-    `;
-    downloadBtn.style.backgroundColor = '#10B981';
-    
-    setTimeout(() => {
-        downloadBtn.innerHTML = originalHTML;
-        downloadBtn.style.backgroundColor = '';
-        if (typeof lucide !== 'undefined') {
-            lucide.createIcons();
-        }
-    }, 2000);
 }
 
 function createAnother() {
@@ -481,6 +478,7 @@ function createAnother() {
     AppState.currentQuestionIndex = 0;
     AppState.answers = {};
     AppState.currentQuestions = [];
+    AppState.generatedJSON = null;
     
     // Go back to use case selection
     showUseCaseSelection();
