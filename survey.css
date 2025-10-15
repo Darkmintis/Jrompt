@@ -1,0 +1,428 @@
+/* ===================================
+   SURVEY QUESTIONS STYLING
+   Dedicated CSS for all survey layouts
+   =================================== */
+
+/* Survey Container */
+#survey-page {
+    display: none;
+    height: 100vh;
+    overflow: hidden;
+    background: #0f172a;
+}
+
+#survey-page.active {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Survey Header */
+.survey-header {
+    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+    padding: 1.5rem 2rem;
+    border-bottom: 2px solid rgba(255, 107, 53, 0.2);
+    flex-shrink: 0;
+}
+
+.survey-header h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #fff;
+}
+
+.progress-bar {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    height: 8px;
+    overflow: hidden;
+    margin-bottom: 0.5rem;
+}
+
+.progress-fill {
+    background: linear-gradient(90deg, #FF6B35 0%, #F59E0B 100%);
+    height: 100%;
+    transition: width 0.3s ease;
+    border-radius: 10px;
+}
+
+.progress-text {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+}
+
+/* Survey Content - SCROLLABLE AREA */
+.survey-content {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 2rem;
+    background: #0f172a;
+}
+
+/* Custom Scrollbar */
+.survey-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+.survey-content::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+}
+
+.survey-content::-webkit-scrollbar-thumb {
+    background: rgba(255, 107, 53, 0.5);
+    border-radius: 10px;
+}
+
+.survey-content::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 107, 53, 0.7);
+}
+
+/* Question Card */
+.question-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.question-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: #fff;
+    line-height: 1.4;
+}
+
+.question-card p {
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+/* Text Input */
+.question-card input[type="text"] {
+    width: 100%;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    color: #fff;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    font-family: inherit;
+}
+
+.question-card input[type="text"]:focus {
+    outline: none;
+    border-color: #FF6B35;
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.1);
+}
+
+.question-card input[type="text"]::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+/* Textarea - BIGGER SIZE */
+.question-card textarea {
+    width: 100%;
+    min-height: 180px;
+    max-height: 400px;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    color: #fff;
+    font-size: 1rem;
+    resize: vertical;
+    transition: all 0.3s ease;
+    font-family: inherit;
+    line-height: 1.6;
+}
+
+.question-card textarea:focus {
+    outline: none;
+    border-color: #FF6B35;
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.1);
+}
+
+.question-card textarea::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+/* Option Cards Grid - IMPROVED LAYOUT */
+.options-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+/* Individual Option Card - BETTER SIZING */
+.option-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 1.25rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+    min-height: 140px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.option-card:hover {
+    border-color: #FF6B35;
+    background: rgba(255, 107, 53, 0.1);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 107, 53, 0.2);
+}
+
+.option-card.selected {
+    border-color: #FF6B35;
+    background: rgba(255, 107, 53, 0.15);
+    box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.2);
+}
+
+.option-card i {
+    font-size: 2rem;
+    margin-bottom: 0.75rem;
+    color: #FF6B35;
+}
+
+.option-card strong {
+    display: block;
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    color: #fff;
+}
+
+.option-card small {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.875rem;
+    line-height: 1.4;
+}
+
+/* Survey Navigation */
+.survey-navigation {
+    background: rgba(255, 255, 255, 0.03);
+    padding: 1.5rem 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    flex-shrink: 0;
+}
+
+.survey-navigation button {
+    padding: 0.875rem 2rem;
+    border: none;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.survey-navigation button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.survey-navigation button:not(:disabled):hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+#prevBtn {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+}
+
+#prevBtn:not(:disabled):hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+#nextBtn {
+    background: linear-gradient(135deg, #FF6B35 0%, #F59E0B 100%);
+    color: #fff;
+    margin-left: auto;
+}
+
+#nextBtn:not(:disabled):hover {
+    background: linear-gradient(135deg, #F59E0B 0%, #FF6B35 100%);
+}
+
+/* Keyboard Hint */
+.keyboard-hint {
+    position: fixed;
+    bottom: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.8);
+    color: rgba(255, 255, 255, 0.7);
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    pointer-events: none;
+    z-index: 100;
+}
+
+.keyboard-hint kbd {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-family: monospace;
+    color: #FF6B35;
+}
+
+/* ===================================
+   RESPONSIVE DESIGN FOR SURVEYS
+   =================================== */
+
+@media (max-width: 768px) {
+    .survey-header {
+        padding: 1rem;
+    }
+
+    .survey-header h2 {
+        font-size: 1.25rem;
+    }
+
+    .survey-content {
+        padding: 1rem;
+    }
+
+    .question-card {
+        padding: 1.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .question-card h3 {
+        font-size: 1.25rem;
+    }
+
+    /* Smaller textarea on mobile but still usable */
+    .question-card textarea {
+        min-height: 150px;
+        font-size: 0.95rem;
+    }
+
+    /* Option cards stack better on mobile */
+    .options-grid {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+    }
+
+    .option-card {
+        min-height: 120px;
+        padding: 1rem;
+    }
+
+    .option-card i {
+        font-size: 1.75rem;
+    }
+
+    .option-card strong {
+        font-size: 1rem;
+    }
+
+    .survey-navigation {
+        padding: 1rem;
+        flex-wrap: wrap;
+    }
+
+    .survey-navigation button {
+        padding: 0.75rem 1.5rem;
+        font-size: 0.95rem;
+    }
+
+    .keyboard-hint {
+        display: none; /* Hide on mobile */
+    }
+}
+
+@media (max-width: 480px) {
+    .survey-header {
+        padding: 0.75rem;
+    }
+
+    .survey-content {
+        padding: 0.75rem;
+    }
+
+    .question-card {
+        padding: 1.25rem;
+    }
+
+    .question-card h3 {
+        font-size: 1.1rem;
+    }
+
+    .question-card textarea {
+        min-height: 130px;
+    }
+
+    .option-card {
+        min-height: 100px;
+        padding: 0.875rem;
+    }
+}
+
+/* ===================================
+   SPECIAL CASES
+   =================================== */
+
+/* For questions with many options */
+.options-grid.many-options {
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+}
+
+.options-grid.many-options .option-card {
+    min-height: 120px;
+    padding: 1rem;
+}
+
+/* For questions with few options (2-3) */
+.options-grid.few-options {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    max-width: 600px;
+}
+
+/* Loading state */
+.question-card.loading {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+/* Error state */
+.question-card.error {
+    border-color: #EF4444;
+    background: rgba(239, 68, 68, 0.05);
+}
+
+.error-message {
+    color: #EF4444;
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.error-message i {
+    font-size: 1rem;
+}

@@ -47,6 +47,65 @@ body {
     overflow-x: hidden;
 }
 
+/* ===========================
+   Sidebar Ads (Vertical) - Overlay Style
+   =========================== */
+.sidebar-ad {
+    position: fixed;
+    top: 100px;
+    width: 160px;
+    height: 600px;
+    z-index: 999;
+    display: none; /* Hidden on mobile by default */
+    pointer-events: none; /* Allow clicking through the container */
+}
+
+.sidebar-ad-left {
+    left: 10px;
+}
+
+.sidebar-ad-right {
+    right: 10px;
+}
+
+.ad-placeholder-vertical {
+    width: 100%;
+    height: 100%;
+    background: rgba(248, 249, 250, 0.95);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(222, 226, 230, 0.5);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.875rem;
+    font-weight: 600;
+    padding: 1rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    pointer-events: auto; /* Re-enable clicking on the ad itself */
+}
+
+/* Show sidebar ads on larger screens - NO BODY PADDING */
+@media (min-width: 1600px) {
+    .sidebar-ad {
+        display: block;
+        animation: fadeInAd 0.6s ease-out;
+    }
+}
+
+@keyframes fadeInAd {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -71,6 +130,10 @@ html {
 
 .page.active {
     display: block;
+}
+
+#landing-page {
+    background: var(--bg-white);
 }
 
 @keyframes fadeIn {
@@ -236,8 +299,19 @@ html {
 }
 
 .btn-large {
-    padding: 16px 40px;
+    padding: 18px 48px;
     font-size: 1.2rem;
+    font-weight: 700;
+    background: white;
+    color: var(--primary-orange);
+    border: 2px solid white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.btn-large:hover {
+    background: rgba(255, 255, 255, 0.95);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
 }
 
 .btn:disabled {
@@ -620,150 +694,45 @@ html {
    =========================== */
 .cta-section {
     padding: 100px 20px;
-    background: linear-gradient(135deg, var(--secondary-blue) 0%, var(--accent-cyan) 100%);
+    background: linear-gradient(135deg, #FF6B35 0%, #F59E0B 50%, #FF6B35 100%);
     color: white;
     text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.cta-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 30% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+.cta-content {
+    position: relative;
+    z-index: 1;
 }
 
 .cta-content h2 {
     font-size: 2.5rem;
     margin-bottom: 16px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .cta-content p {
     font-size: 1.2rem;
     margin-bottom: 32px;
-    opacity: 0.9;
+    opacity: 0.95;
 }
 
 /* ===========================
-   Survey Page
+   Survey Page Styles
+   All survey styles moved to survey.css
    =========================== */
-#survey-page {
-    min-height: 100vh;
-    padding: 60px 20px;
-    background: var(--bg-light);
-}
-
-.survey-container {
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-.progress-bar {
-    width: 100%;
-    height: 8px;
-    background: var(--border-color);
-    border-radius: 10px;
-    overflow: hidden;
-    margin-bottom: 12px;
-}
-
-.progress-fill {
-    height: 100%;
-    background: linear-gradient(90deg, var(--primary-orange) 0%, var(--accent-yellow) 100%);
-    transition: width var(--transition-slow);
-    border-radius: 10px;
-}
-
-.progress-text {
-    text-align: center;
-    color: var(--text-medium);
-    font-weight: 600;
-    margin-bottom: 40px;
-}
-
-.question-container {
-    background: white;
-    padding: 48px;
-    border-radius: 16px;
-    box-shadow: var(--shadow-lg);
-    min-height: 400px;
-    margin-bottom: 32px;
-}
-
-.question {
-    animation: slideInRight 0.5s ease;
-}
-
-.question-label {
-    font-size: 1.8rem;
-    font-weight: 700;
-    color: var(--text-dark);
-    margin-bottom: 32px;
-    line-height: 1.4;
-}
-
-.question-description {
-    color: var(--text-medium);
-    margin-bottom: 32px;
-    font-size: 1.1rem;
-}
-
-.answer-input {
-    width: 100%;
-    padding: 16px 20px;
-    font-size: 1.1rem;
-    border: 2px solid var(--border-color);
-    border-radius: 10px;
-    font-family: inherit;
-    transition: all var(--transition-normal);
-    background: var(--bg-light);
-}
-
-.answer-input:focus {
-    outline: none;
-    border-color: var(--primary-orange);
-    background: white;
-    box-shadow: 0 0 0 4px rgba(255, 107, 53, 0.1);
-}
-
-.answer-input.textarea {
-    min-height: 150px;
-    resize: vertical;
-}
-
-.answer-options {
-    display: grid;
-    gap: 16px;
-}
-
-.option-card {
-    padding: 20px;
-    border: 2px solid var(--border-color);
-    border-radius: 10px;
-    cursor: pointer;
-    transition: all var(--transition-fast);
-    background: var(--bg-light);
-}
-
-.option-card:hover {
-    border-color: var(--primary-orange);
-    background: white;
-    transform: translateX(4px);
-}
-
-.option-card.selected {
-    border-color: var(--primary-orange);
-    background: rgba(255, 107, 53, 0.05);
-}
-
-.option-card h4 {
-    font-size: 1.2rem;
-    margin-bottom: 6px;
-    color: var(--text-dark);
-}
-
-.option-card p {
-    color: var(--text-medium);
-    font-size: 0.95rem;
-}
-
-.survey-nav {
-    display: flex;
-    justify-content: space-between;
-    gap: 16px;
-}
 
 /* ===========================
    Results Page
@@ -969,6 +938,11 @@ footer {
 /* ===========================
    Use Case Selection Page
    =========================== */
+#use-case-page {
+    background: var(--bg-light);
+    min-height: 100vh;
+}
+
 .use-case-container {
     padding: 80px 0 60px;
     min-height: calc(100vh - 80px);
@@ -1047,96 +1021,6 @@ footer {
 }
 
 /* ===========================
-   Survey - Option Cards
-   =========================== */
-.options-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 16px;
-    margin-top: 24px;
-}
-
-.option-card {
-    background: white;
-    border: 2px solid var(--border-color);
-    border-radius: 12px;
-    padding: 24px 20px;
-    text-align: center;
-    cursor: pointer;
-    transition: all var(--transition-fast);
-    position: relative;
-}
-
-.option-card:hover {
-    border-color: var(--primary-orange);
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-md);
-}
-
-.option-card.selected {
-    border-color: var(--primary-orange);
-    background: rgba(255, 107, 53, 0.05);
-}
-
-.option-card.selected::after {
-    content: '';
-    position: absolute;
-    top: 12px;
-    right: 12px;
-    width: 24px;
-    height: 24px;
-    background: var(--primary-orange);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.option-card.selected::before {
-    content: '✓';
-    position: absolute;
-    top: 12px;
-    right: 12px;
-    width: 24px;
-    height: 24px;
-    color: white;
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1;
-}
-
-.option-icon {
-    width: 48px;
-    height: 48px;
-    margin: 0 auto 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 12px;
-    background: rgba(255, 107, 53, 0.1);
-    color: var(--primary-orange);
-}
-
-.option-icon svg {
-    width: 24px;
-    height: 24px;
-}
-
-.option-card h4 {
-    font-size: 1rem;
-    margin-bottom: 8px;
-    color: var(--text-dark);
-}
-
-.option-card p {
-    font-size: 0.85rem;
-    color: var(--text-medium);
-    line-height: 1.4;
-}
-
-/* ===========================
    Responsive Design
    =========================== */
 @media (max-width: 1024px) {
@@ -1196,22 +1080,6 @@ footer {
         grid-template-columns: 1fr;
     }
     
-    .options-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .question-container {
-        padding: 32px 24px;
-    }
-    
-    .question-label {
-        font-size: 1.5rem;
-    }
-    
-    .survey-nav {
-        flex-direction: column;
-    }
-    
     .results-header h2 {
         font-size: 2rem;
     }
@@ -1225,9 +1093,5 @@ footer {
     .btn {
         width: 100%;
         justify-content: center;
-    }
-    
-    .question-container {
-        padding: 24px 16px;
     }
 }

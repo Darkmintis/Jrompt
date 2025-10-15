@@ -256,20 +256,24 @@ function updateNavButtons() {
     const nextBtn = document.getElementById('next-btn');
     const generateBtn = document.getElementById('generate-btn');
     
+    if (!prevBtn || !nextBtn || !generateBtn) return;
+    
     // Show/hide previous button
     if (AppState.currentQuestionIndex === 0) {
-        prevBtn.style.display = 'none';
+        prevBtn.disabled = true;
+        prevBtn.style.opacity = '0.5';
     } else {
-        prevBtn.style.display = 'flex';
+        prevBtn.disabled = false;
+        prevBtn.style.opacity = '1';
     }
     
     // Show/hide next vs generate button
     if (AppState.currentQuestionIndex === AppState.currentQuestions.length - 1) {
-        nextBtn.style.display = 'none';
-        generateBtn.style.display = 'flex';
+        nextBtn.classList.add('hidden');
+        generateBtn.classList.remove('hidden');
     } else {
-        nextBtn.style.display = 'flex';
-        generateBtn.style.display = 'none';
+        nextBtn.classList.remove('hidden');
+        generateBtn.classList.add('hidden');
     }
 }
 

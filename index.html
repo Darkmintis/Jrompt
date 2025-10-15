@@ -8,10 +8,19 @@
     <meta name="author" content="Jrompt">
     <title>Jrompt - JSON Prompt Generator for AI Tools</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="survey.css">
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
+    <!-- Sidebar Ads (Vertical) -->
+    <div class="sidebar-ad sidebar-ad-left">
+        <div class="ad-placeholder-vertical">Advertisement<br>(160x600)</div>
+    </div>
+    <div class="sidebar-ad sidebar-ad-right">
+        <div class="ad-placeholder-vertical">Advertisement<br>(160x600)</div>
+    </div>
+
     <!-- Navigation Bar -->
     <nav class="navbar">
         <div class="container nav-container">
@@ -62,11 +71,6 @@
                             <span>Learn More</span>
                         </button>
                     </div>
-                    
-                    <!-- AdSense Placeholder - Hero -->
-                    <div class="ad-space hero-ad">
-                        <div class="ad-placeholder">Advertisement (728x90)</div>
-                    </div>
                 </div>
                 
                 <div class="hero-visual">
@@ -81,13 +85,13 @@
                         </div>
                         <div class="code-window-body">
                             <pre class="json-preview"><code>{
-  <span class="json-key">"prompt"</span>: {
-    <span class="json-key">"task"</span>: <span class="json-string">"Write article..."</span>,
-    <span class="json-key">"tone"</span>: <span class="json-string">"professional"</span>,
-    <span class="json-key">"audience"</span>: <span class="json-string">"developers"</span>,
-    <span class="json-key">"output_type"</span>: <span class="json-string">"article"</span>,
-    <span class="json-key">"length"</span>: <span class="json-string">"medium"</span>
-  }
+  <span class="json-key">"use_case"</span>: <span class="json-string">"text_content"</span>,
+  <span class="json-key">"task"</span>: <span class="json-string">"Write a professional blog post about AI"</span>,
+  <span class="json-key">"content_type"</span>: <span class="json-string">"blog_post"</span>,
+  <span class="json-key">"tone"</span>: <span class="json-string">"professional"</span>,
+  <span class="json-key">"audience"</span>: <span class="json-string">"developers"</span>,
+  <span class="json-key">"length"</span>: <span class="json-string">"medium"</span>,
+  <span class="json-key">"writing_style"</span>: <span class="json-string">"informative"</span>
 }</code></pre>
                         </div>
                     </div>
@@ -227,11 +231,6 @@
                         <span>Get Started Now</span>
                     </button>
                 </div>
-                
-                <!-- AdSense Placeholder - CTA -->
-                <div class="ad-space cta-ad">
-                    <div class="ad-placeholder">Advertisement (728x90)</div>
-                </div>
             </div>
         </div>
     </section>
@@ -259,42 +258,33 @@
 
     <!-- Survey Page -->
     <section id="survey-page" class="page">
-        <div class="container">
-            <div class="survey-container">
-                <!-- Progress Bar -->
-                <div class="progress-bar">
-                    <div class="progress-fill" id="progress-fill"></div>
-                </div>
-                <div class="progress-text">
-                    <span id="current-question">1</span> of <span id="total-questions">6</span>
-                </div>
-                
-                <!-- Question Container -->
-                <div class="question-container" id="question-container">
-                    <!-- Questions will be dynamically loaded here -->
-                </div>
-                
-                <!-- Navigation Buttons -->
-                <div class="survey-nav">
-                    <button class="btn btn-outline" id="prev-btn" onclick="previousQuestion()" disabled>
-                        <i data-lucide="arrow-left"></i>
-                        <span>Previous</span>
-                    </button>
-                    <button class="btn btn-primary" id="next-btn" onclick="nextQuestion()">
-                        <span>Next</span>
-                        <i data-lucide="arrow-right"></i>
-                    </button>
-                    <button class="btn btn-success hidden" id="generate-btn" onclick="generateJSON()">
-                        <i data-lucide="check-circle"></i>
-                        <span>Generate JSON</span>
-                    </button>
-                </div>
-                
-                <!-- AdSense Placeholder - Survey -->
-                <div class="ad-space survey-ad">
-                    <div class="ad-placeholder">Advertisement (728x90)</div>
-                </div>
+        <div class="survey-header">
+            <h2>Create Your JSON Prompt</h2>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress-fill"></div>
             </div>
+            <p class="progress-text" id="progress-text">Question 1 of 7</p>
+        </div>
+        
+        <div class="survey-content">
+            <div id="question-container">
+                <!-- Questions will be dynamically loaded here -->
+            </div>
+        </div>
+        
+        <div class="survey-navigation">
+            <button class="btn btn-outline" id="prev-btn" onclick="previousQuestion()">
+                <i data-lucide="arrow-left"></i>
+                <span>Previous</span>
+            </button>
+            <button class="btn btn-primary" id="next-btn" onclick="nextQuestion()">
+                <span>Next</span>
+                <i data-lucide="arrow-right"></i>
+            </button>
+            <button class="btn btn-success hidden" id="generate-btn" onclick="generateJSON()">
+                <i data-lucide="sparkles"></i>
+                <span>Generate JSON</span>
+            </button>
         </div>
     </section>
 
