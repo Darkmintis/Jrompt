@@ -180,39 +180,60 @@ function loadQuestion(index) {
             />
         `;
     } else if (question.type === 'cards') {
+        // Use dropdown select for better space efficiency
         inputHTML = `
-            <div class="option-cards" id="option-cards">
+            <select 
+                id="answer-input" 
+                class="survey-select"
+                onchange="selectOption('${question.id}', this.value)"
+                ${question.required ? 'required' : ''}
+            >
+                <option value="">-- Select an option --</option>
                 ${question.options.map(opt => `
-                    <div class="option-card ${AppState.answers[question.id] === opt.value ? 'selected' : ''}" 
-                         onclick="selectOption('${question.id}', '${opt.value}')">
-                        <div class="option-icon">
-                            <i data-lucide="${opt.icon}"></i>
-                        </div>
-                        <div class="option-content">
-                            <div class="option-label">${opt.label}</div>
-                            <div class="option-description">${opt.description}</div>
-                        </div>
-                        <div class="option-check">
-                            <i data-lucide="check-circle"></i>
-                        </div>
-                    </div>
+                    <option 
+                        value="${opt.value}"
+                        ${AppState.answers[question.id] === opt.value ? 'selected' : ''}
+                    >${opt.label} - ${opt.description}</option>
                 `).join('')}
-            </div>
+            </select>
         `;
     }
     
+    // Add banner ad
+    const bannerAdHTML = `
+        <div class="survey-banner-ad">
+            <div class="ad-placeholder-banner">Advertisement (728x90)</div>
+        </div>
+    `;
+    
+    // Add inline navigation buttons
+    const navigationHTML = `
+        <div class="inline-navigation">
+            <button class="btn btn-outline" id="prev-btn" onclick="previousQuestion()">
+                <i data-lucide="arrow-left"></i>
+                <span>Previous</span>
+            </button>
+            <button class="btn btn-primary" id="next-btn" onclick="nextQuestion()">
+                <span>Next</span>
+                <i data-lucide="arrow-right"></i>
+            </button>
+            <button class="btn btn-success hidden" id="generate-btn" onclick="generateJSON()">
+                <i data-lucide="sparkles"></i>
+                <span>Generate JSON</span>
+            </button>
+        </div>
+    `;
+    
     container.innerHTML = `
         <div class="question-card">
-            <div class="question-header">
-                <span class="question-number">Question ${index + 1} of ${AppState.currentQuestions.length}</span>
-                ${!question.required ? '<span class="optional-badge">Optional</span>' : ''}
-            </div>
-            <h2 class="question-title">${question.question}</h2>
-            <p class="question-description">${question.description}</p>
+            <h3>${question.question}</h3>
+            <p>${question.description}</p>
             <div class="input-wrapper">
                 ${inputHTML}
             </div>
+            ${navigationHTML}
         </div>
+        ${bannerAdHTML}
     `;
     
     // Update navigation buttons
@@ -235,14 +256,7 @@ function loadQuestion(index) {
 function selectOption(questionId, value) {
     // Save the answer
     AppState.answers[questionId] = value;
-    
-    // Update UI
-    const cards = document.querySelectorAll('.option-card');
-    cards.forEach(card => card.classList.remove('selected'));
-    event.currentTarget.classList.add('selected');
-}
-
-function updateProgress() {
+}function updateProgress() {
     const progress = ((AppState.currentQuestionIndex + 1) / AppState.currentQuestions.length) * 100;
     const progressFill = document.getElementById('progress-fill');
     const progressText = document.getElementById('progress-text');

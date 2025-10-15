@@ -1,14 +1,14 @@
 /* ===================================
-   SURVEY QUESTIONS STYLING
-   Dedicated CSS for all survey layouts
+   SURVEY QUESTIONS STYLING - LIGHT MODE
+   Redesigned to fit everything in one screen
    =================================== */
 
-/* Survey Container */
+/* Survey Container - Light Mode */
 #survey-page {
     display: none;
     height: 100vh;
     overflow: hidden;
-    background: #0f172a;
+    background: linear-gradient(135deg, #FFF5F2 0%, #FFF 50%, #F0F9FF 100%);
 }
 
 #survey-page.active {
@@ -16,24 +16,32 @@
     flex-direction: column;
 }
 
-/* Survey Header */
+/* Survey Header - Compact */
 .survey-header {
-    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-    padding: 1.5rem 2rem;
-    border-bottom: 2px solid rgba(255, 107, 53, 0.2);
+    background: white;
+    padding: 1rem 2rem;
+    border-bottom: 2px solid rgba(255, 107, 53, 0.1);
     flex-shrink: 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.survey-header > * {
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .survey-header h2 {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-    color: #fff;
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
+    color: #1F2937;
+    font-weight: 700;
 }
 
 .progress-bar {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 107, 53, 0.1);
     border-radius: 10px;
-    height: 8px;
+    height: 6px;
     overflow: hidden;
     margin-bottom: 0.5rem;
 }
@@ -46,72 +54,62 @@
 }
 
 .progress-text {
-    color: rgba(255, 255, 255, 0.7);
+    color: #6B7280;
     font-size: 0.875rem;
-    margin-top: 0.5rem;
+    margin-top: 0.25rem;
+    font-weight: 600;
 }
 
-/* Survey Content - SCROLLABLE AREA */
+/* Survey Content - NO SCROLL, Fits in viewport */
 .survey-content {
     flex: 1;
-    overflow-y: auto;
-    overflow-x: hidden;
-    padding: 2rem;
-    background: #0f172a;
+    overflow: hidden;
+    padding: 1.5rem 2rem;
+    background: transparent;
+    display: flex;
+    flex-direction: column;
 }
 
-/* Custom Scrollbar */
-.survey-content::-webkit-scrollbar {
-    width: 8px;
-}
-
-.survey-content::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 10px;
-}
-
-.survey-content::-webkit-scrollbar-thumb {
-    background: rgba(255, 107, 53, 0.5);
-    border-radius: 10px;
-}
-
-.survey-content::-webkit-scrollbar-thumb:hover {
-    background: rgba(255, 107, 53, 0.7);
-}
-
-/* Question Card */
-.question-card {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 16px;
-    padding: 2rem;
-    margin-bottom: 2rem;
+#question-container {
     max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 0 auto;
+    width: 100%;
+}
+
+/* Question Card - Compact */
+.question-card {
+    background: white;
+    border: 2px solid rgba(255, 107, 53, 0.15);
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    flex-shrink: 0;
 }
 
 .question-card h3 {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     margin-bottom: 0.5rem;
-    color: #fff;
-    line-height: 1.4;
+    color: #1F2937;
+    line-height: 1.3;
+    font-weight: 700;
 }
 
 .question-card p {
-    color: rgba(255, 255, 255, 0.7);
-    margin-bottom: 1.5rem;
-    line-height: 1.6;
+    color: #6B7280;
+    margin-bottom: 1rem;
+    line-height: 1.5;
+    font-size: 0.95rem;
 }
 
-/* Text Input */
+/* Text Input - Compact */
 .question-card input[type="text"] {
     width: 100%;
-    padding: 1rem;
-    background: rgba(255, 255, 255, 0.05);
-    border: 2px solid rgba(255, 255, 255, 0.1);
-    border-radius: 12px;
-    color: #fff;
+    padding: 0.75rem 1rem;
+    background: #F9FAFB;
+    border: 2px solid #E5E7EB;
+    border-radius: 10px;
+    color: #1F2937;
     font-size: 1rem;
     transition: all 0.3s ease;
     font-family: inherit;
@@ -120,114 +118,113 @@
 .question-card input[type="text"]:focus {
     outline: none;
     border-color: #FF6B35;
-    background: rgba(255, 255, 255, 0.08);
+    background: white;
     box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.1);
 }
 
 .question-card input[type="text"]::placeholder {
-    color: rgba(255, 255, 255, 0.4);
+    color: #9CA3AF;
 }
 
-/* Textarea - BIGGER SIZE */
+/* Textarea - Compact (only when needed) */
 .question-card textarea {
     width: 100%;
-    min-height: 180px;
-    max-height: 400px;
-    padding: 1rem;
-    background: rgba(255, 255, 255, 0.05);
-    border: 2px solid rgba(255, 255, 255, 0.1);
-    border-radius: 12px;
-    color: #fff;
+    min-height: 100px;
+    max-height: 150px;
+    padding: 0.75rem 1rem;
+    background: #F9FAFB;
+    border: 2px solid #E5E7EB;
+    border-radius: 10px;
+    color: #1F2937;
     font-size: 1rem;
     resize: vertical;
     transition: all 0.3s ease;
     font-family: inherit;
-    line-height: 1.6;
+    line-height: 1.5;
 }
 
 .question-card textarea:focus {
     outline: none;
     border-color: #FF6B35;
-    background: rgba(255, 255, 255, 0.08);
+    background: white;
     box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.1);
 }
 
 .question-card textarea::placeholder {
-    color: rgba(255, 255, 255, 0.4);
+    color: #9CA3AF;
 }
 
-/* Option Cards Grid - IMPROVED LAYOUT */
-.options-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1rem;
-    margin-top: 1.5rem;
-}
-
-/* Individual Option Card - BETTER SIZING */
-.option-card {
-    background: rgba(255, 255, 255, 0.03);
-    border: 2px solid rgba(255, 255, 255, 0.1);
-    border-radius: 12px;
-    padding: 1.25rem;
+/* Dropdown Select - NEW! For card-type questions */
+.question-card select {
+    width: 100%;
+    padding: 0.875rem 1rem;
+    background: white;
+    border: 2px solid #E5E7EB;
+    border-radius: 10px;
+    color: #1F2937;
+    font-size: 1rem;
+    font-family: inherit;
     cursor: pointer;
     transition: all 0.3s ease;
-    text-align: center;
-    min-height: 140px;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%23FF6B35' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    padding-right: 3rem;
+}
+
+.question-card select:focus {
+    outline: none;
+    border-color: #FF6B35;
+    box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.1);
+}
+
+.question-card select option {
+    padding: 0.5rem;
+    background: white;
+    color: #1F2937;
+}
+
+.question-card select option:hover {
+    background: #FFF5F2;
+}
+
+/* Banner Ad Below Question */
+.survey-banner-ad {
+    margin: 1.5rem 0;
+    flex-shrink: 0;
+}
+
+.survey-banner-ad .ad-placeholder-banner {
+    width: 100%;
+    max-width: 728px;
+    height: 90px;
+    margin: 0 auto;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border: 2px dashed #dee2e6;
+    border-radius: 8px;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
     align-items: center;
-}
-
-.option-card:hover {
-    border-color: #FF6B35;
-    background: rgba(255, 107, 53, 0.1);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(255, 107, 53, 0.2);
-}
-
-.option-card.selected {
-    border-color: #FF6B35;
-    background: rgba(255, 107, 53, 0.15);
-    box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.2);
-}
-
-.option-card i {
-    font-size: 2rem;
-    margin-bottom: 0.75rem;
-    color: #FF6B35;
-}
-
-.option-card strong {
-    display: block;
-    font-size: 1.1rem;
-    margin-bottom: 0.5rem;
-    color: #fff;
-}
-
-.option-card small {
-    color: rgba(255, 255, 255, 0.6);
+    justify-content: center;
+    color: #6c757d;
     font-size: 0.875rem;
-    line-height: 1.4;
+    font-weight: 600;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
-/* Survey Navigation */
-.survey-navigation {
-    background: rgba(255, 255, 255, 0.03);
-    padding: 1.5rem 2rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+/* Inline Navigation Buttons (below question) */
+.inline-navigation {
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 1rem;
-    flex-shrink: 0;
+    margin-top: 1rem;
 }
 
-.survey-navigation button {
-    padding: 0.875rem 2rem;
+.inline-navigation button {
+    padding: 0.75rem 1.5rem;
     border: none;
-    border-radius: 12px;
+    border-radius: 10px;
     font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
@@ -237,33 +234,42 @@
     gap: 0.5rem;
 }
 
-.survey-navigation button:disabled {
-    opacity: 0.5;
+.inline-navigation button:disabled {
+    opacity: 0.4;
     cursor: not-allowed;
 }
 
-.survey-navigation button:not(:disabled):hover {
+.inline-navigation button:not(:disabled):hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-#prevBtn {
-    background: rgba(255, 255, 255, 0.1);
-    color: #fff;
+.inline-navigation #prev-btn {
+    background: #F3F4F6;
+    color: #4B5563;
+    border: 2px solid #E5E7EB;
 }
 
-#prevBtn:not(:disabled):hover {
-    background: rgba(255, 255, 255, 0.15);
+.inline-navigation #prev-btn:not(:disabled):hover {
+    background: #E5E7EB;
+    border-color: #D1D5DB;
 }
 
-#nextBtn {
+.inline-navigation #next-btn,
+.inline-navigation #generate-btn {
     background: linear-gradient(135deg, #FF6B35 0%, #F59E0B 100%);
-    color: #fff;
-    margin-left: auto;
+    color: white;
+    border: 2px solid transparent;
 }
 
-#nextBtn:not(:disabled):hover {
+.inline-navigation #next-btn:not(:disabled):hover,
+.inline-navigation #generate-btn:not(:disabled):hover {
     background: linear-gradient(135deg, #F59E0B 0%, #FF6B35 100%);
+}
+
+/* Survey Navigation - Light Mode (Footer - now hidden or minimal) */
+.survey-navigation {
+    display: none; /* Hide the footer navigation since we have inline buttons */
 }
 
 /* Keyboard Hint */
@@ -295,73 +301,15 @@
 
 @media (max-width: 768px) {
     .survey-header {
-        padding: 1rem;
+        padding: 0.875rem 1rem;
     }
 
     .survey-header h2 {
-        font-size: 1.25rem;
+        font-size: 1.125rem;
     }
 
     .survey-content {
         padding: 1rem;
-    }
-
-    .question-card {
-        padding: 1.5rem;
-        margin-bottom: 1rem;
-    }
-
-    .question-card h3 {
-        font-size: 1.25rem;
-    }
-
-    /* Smaller textarea on mobile but still usable */
-    .question-card textarea {
-        min-height: 150px;
-        font-size: 0.95rem;
-    }
-
-    /* Option cards stack better on mobile */
-    .options-grid {
-        grid-template-columns: 1fr;
-        gap: 0.75rem;
-    }
-
-    .option-card {
-        min-height: 120px;
-        padding: 1rem;
-    }
-
-    .option-card i {
-        font-size: 1.75rem;
-    }
-
-    .option-card strong {
-        font-size: 1rem;
-    }
-
-    .survey-navigation {
-        padding: 1rem;
-        flex-wrap: wrap;
-    }
-
-    .survey-navigation button {
-        padding: 0.75rem 1.5rem;
-        font-size: 0.95rem;
-    }
-
-    .keyboard-hint {
-        display: none; /* Hide on mobile */
-    }
-}
-
-@media (max-width: 480px) {
-    .survey-header {
-        padding: 0.75rem;
-    }
-
-    .survey-content {
-        padding: 0.75rem;
     }
 
     .question-card {
@@ -369,60 +317,43 @@
     }
 
     .question-card h3 {
-        font-size: 1.1rem;
+        font-size: 1.125rem;
     }
 
     .question-card textarea {
-        min-height: 130px;
+        min-height: 80px;
+        max-height: 120px;
     }
 
-    .option-card {
-        min-height: 100px;
-        padding: 0.875rem;
+    .survey-navigation {
+        padding: 0.875rem 1rem;
+    }
+
+    .survey-navigation button {
+        padding: 0.625rem 1.25rem;
+        font-size: 0.95rem;
+    }
+
+    .survey-banner-ad .ad-placeholder-banner {
+        height: 70px;
+        font-size: 0.75rem;
     }
 }
 
-/* ===================================
-   SPECIAL CASES
-   =================================== */
+@media (max-width: 480px) {
+    .survey-header h2 {
+        font-size: 1rem;
+    }
 
-/* For questions with many options */
-.options-grid.many-options {
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-}
+    .question-card {
+        padding: 1rem;
+    }
 
-.options-grid.many-options .option-card {
-    min-height: 120px;
-    padding: 1rem;
-}
+    .question-card h3 {
+        font-size: 1rem;
+    }
 
-/* For questions with few options (2-3) */
-.options-grid.few-options {
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    max-width: 600px;
-}
-
-/* Loading state */
-.question-card.loading {
-    opacity: 0.6;
-    pointer-events: none;
-}
-
-/* Error state */
-.question-card.error {
-    border-color: #EF4444;
-    background: rgba(239, 68, 68, 0.05);
-}
-
-.error-message {
-    color: #EF4444;
-    font-size: 0.875rem;
-    margin-top: 0.5rem;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.error-message i {
-    font-size: 1rem;
+    .question-card textarea {
+        min-height: 70px;
+    }
 }
