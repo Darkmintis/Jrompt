@@ -63,9 +63,10 @@ function showResultsPage() {
 }
 
 function hideAllPages() {
-    document.querySelectorAll('.page').forEach(page => {
+    const pages = document.querySelectorAll('.page');
+    for (const page of pages) {
         page.classList.remove('active');
-    });
+    }
 }
 
 // ===========================
@@ -76,7 +77,8 @@ function renderUseCaseCards() {
     const container = document.getElementById('use-case-grid');
     container.innerHTML = '';
     
-    Object.keys(USE_CASES).forEach(key => {
+    const useCaseKeys = Object.keys(USE_CASES);
+    for (const key of useCaseKeys) {
         const useCase = USE_CASES[key];
         const card = document.createElement('div');
         card.className = 'use-case-card';
@@ -94,7 +96,7 @@ function renderUseCaseCards() {
         `;
         
         container.appendChild(card);
-    });
+    }
     
     // Reinitialize Lucide icons for the new elements
     if (typeof lucide !== 'undefined') {
@@ -104,7 +106,6 @@ function renderUseCaseCards() {
 
 async function selectUseCase(useCaseKey) {
     AppState.selectedUseCase = useCaseKey;
-    const useCase = USE_CASES[useCaseKey];
     
     // Load the corresponding question script
     try {
@@ -125,16 +126,16 @@ async function selectUseCase(useCaseKey) {
 function getQuestionsForUseCase(useCaseKey) {
     // Map use cases to their question arrays
     const questionMap = {
-        'text-content': typeof TEXT_CONTENT_QUESTIONS !== 'undefined' ? TEXT_CONTENT_QUESTIONS : [],
-        'image-generation': typeof IMAGE_GENERATION_QUESTIONS !== 'undefined' ? IMAGE_GENERATION_QUESTIONS : [],
-        'video-content': typeof VIDEO_CONTENT_QUESTIONS !== 'undefined' ? VIDEO_CONTENT_QUESTIONS : [],
-        'audio-content': typeof AUDIO_CONTENT_QUESTIONS !== 'undefined' ? AUDIO_CONTENT_QUESTIONS : [],
-        'code-programming': typeof CODE_PROGRAMMING_QUESTIONS !== 'undefined' ? CODE_PROGRAMMING_QUESTIONS : [],
-        'email-communication': typeof EMAIL_COMMUNICATION_QUESTIONS !== 'undefined' ? EMAIL_COMMUNICATION_QUESTIONS : [],
-        'social-media': typeof SOCIAL_MEDIA_QUESTIONS !== 'undefined' ? SOCIAL_MEDIA_QUESTIONS : [],
-        'data-analysis': typeof DATA_ANALYSIS_QUESTIONS !== 'undefined' ? DATA_ANALYSIS_QUESTIONS : [],
-        'marketing': typeof MARKETING_QUESTIONS !== 'undefined' ? MARKETING_QUESTIONS : [],
-        'education': typeof EDUCATION_QUESTIONS !== 'undefined' ? EDUCATION_QUESTIONS : []
+        'text-content': typeof TEXT_CONTENT_QUESTIONS === 'undefined' ? [] : TEXT_CONTENT_QUESTIONS,
+        'image-generation': typeof IMAGE_GENERATION_QUESTIONS === 'undefined' ? [] : IMAGE_GENERATION_QUESTIONS,
+        'video-content': typeof VIDEO_CONTENT_QUESTIONS === 'undefined' ? [] : VIDEO_CONTENT_QUESTIONS,
+        'audio-content': typeof AUDIO_CONTENT_QUESTIONS === 'undefined' ? [] : AUDIO_CONTENT_QUESTIONS,
+        'code-programming': typeof CODE_PROGRAMMING_QUESTIONS === 'undefined' ? [] : CODE_PROGRAMMING_QUESTIONS,
+        'email-communication': typeof EMAIL_COMMUNICATION_QUESTIONS === 'undefined' ? [] : EMAIL_COMMUNICATION_QUESTIONS,
+        'social-media': typeof SOCIAL_MEDIA_QUESTIONS === 'undefined' ? [] : SOCIAL_MEDIA_QUESTIONS,
+        'data-analysis': typeof DATA_ANALYSIS_QUESTIONS === 'undefined' ? [] : DATA_ANALYSIS_QUESTIONS,
+        'marketing': typeof MARKETING_QUESTIONS === 'undefined' ? [] : MARKETING_QUESTIONS,
+        'education': typeof EDUCATION_QUESTIONS === 'undefined' ? [] : EDUCATION_QUESTIONS
     };
     
     return questionMap[useCaseKey] || [];
@@ -415,7 +416,7 @@ function copyToClipboard() {
     
     navigator.clipboard.writeText(jsonText).then(() => {
         showCopySuccess();
-    }).catch((err) => {
+    }).catch(() => {
         // Fallback for older browsers
         const textArea = document.createElement('textarea');
         textArea.value = jsonText;
@@ -424,12 +425,19 @@ function copyToClipboard() {
         document.body.appendChild(textArea);
         textArea.select();
         try {
-            document.execCommand('copy');
-            showCopySuccess();
-        } catch (e) {
+            // Using deprecated execCommand as fallback for older browsers
+            // eslint-disable-next-line deprecation/deprecation
+            const successful = document.execCommand('copy');
+            if (successful) {
+                showCopySuccess();
+            } else {
+                throw new Error('Copy command failed');
+            }
+        } catch (copyError) {
+            console.error('Copy failed:', copyError);
             alert('Failed to copy. Please select and copy manually.');
         }
-        document.body.removeChild(textArea);
+        textArea.remove();
     });
 }
 
@@ -461,14 +469,14 @@ function downloadJSON() {
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     
-    const timestamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, -5);
-    const useCaseName = AppState.selectedUseCase.replace(/-/g, '_');
+    const timestamp = new Date().toISOString().replaceAll(/[:.]/, '-').slice(0, -5);
+    const useCaseName = AppState.selectedUseCase.replaceAll('-', '_');
     link.download = `jrompt_${useCaseName}_${timestamp}.json`;
     link.href = url;
     
     document.body.appendChild(link);
     link.click();
-    document.body.removeChild(link);
+    link.remove();
     URL.revokeObjectURL(url);
 }
 
@@ -528,14 +536,15 @@ function showLanding() {
 // ===========================
 
 class AdManager {
+    observer = null;
+    loadedAds = new Set();
+    
     constructor() {
-        this.observer = null;
-        this.loadedAds = new Set();
         this.init();
     }
 
     init() {
-        if ('IntersectionObserver' in window) {
+        if ('IntersectionObserver' in globalThis) {
             this.observer = new IntersectionObserver(
                 this.handleIntersection.bind(this),
                 { threshold: 0.1, rootMargin: '50px' }
@@ -585,7 +594,7 @@ class AdManager {
     static createAdContainer(type = 'banner', lazy = true) {
         const container = document.createElement('div');
         container.className = 'ad-container';
-        if (lazy) container.setAttribute('data-lazy', 'true');
+        if (lazy) container.dataset.lazy = 'true';
 
         const ad = document.createElement('div');
         ad.className = type === 'square' ? 'ad-square' : 'ad-banner';
