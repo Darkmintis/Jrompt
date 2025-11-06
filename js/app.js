@@ -532,15 +532,122 @@ function showLanding() {
 }
 
 // ===========================
+// Mobile Navigation Functions
+// ===========================
+
+function toggleMobileMenu() {
+    const navLinks = document.getElementById('nav-links');
+    const menuBtn = document.querySelector('.mobile-menu-btn');
+    const body = document.body;
+    
+    // Toggle active classes
+    navLinks.classList.toggle('active');
+    menuBtn.classList.toggle('active');
+    
+    // Create or toggle overlay
+    let overlay = document.querySelector('.nav-overlay');
+    if (!overlay) {
+        overlay = document.createElement('div');
+        overlay.className = 'nav-overlay';
+        overlay.onclick = closeMobileMenu;
+        overlay.setAttribute('aria-hidden', 'true');
+        body.appendChild(overlay);
+    }
+    
+    overlay.classList.toggle('active');
+    
+    // Prevent body scroll when menu is open
+    if (navLinks.classList.contains('active')) {
+        body.style.overflow = 'hidden';
+    } else {
+        body.style.overflow = '';
+    }
+}
+
+function closeMobileMenu() {
+    const navLinks = document.getElementById('nav-links');
+    const menuBtn = document.querySelector('.mobile-menu-btn');
+    const overlay = document.querySelector('.nav-overlay');
+    const body = document.body;
+    
+    navLinks.classList.remove('active');
+    menuBtn.classList.remove('active');
+    
+    if (overlay) {
+        overlay.classList.remove('active');
+    }
+    
+    body.style.overflow = '';
+}
+
+// Close mobile menu when clicking on nav links
+document.addEventListener('click', function(e) {
+    if (e.target.matches('.nav-link') || e.target.closest('.nav-link')) {
+        closeMobileMenu();
+    }
+});
+
+// Close mobile menu on window resize if it gets too wide
+globalThis.addEventListener('resize', function() {
+    if (globalThis.innerWidth > 768) {
+        closeMobileMenu();
+    }
+});
+
+// ===========================
 // Advertisement Management
 // ===========================
 
 class AdManager {
     observer = null;
     loadedAds = new Set();
+    isMobile = false;
+    isTablet = false;
     
     constructor() {
+        this.detectDevice();
         this.init();
+        this.setupResizeHandler();
+    }
+
+    detectDevice() {
+        const width = globalThis.innerWidth;
+        this.isMobile = width <= 768;
+        this.isTablet = width > 768 && width <= 1199;
+    }
+
+    setupResizeHandler() {
+        let resizeTimeout;
+        globalThis.addEventListener('resize', () => {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(() => {
+                this.detectDevice();
+                this.updateAdSizes();
+            }, 250);
+        });
+    }
+
+    updateAdSizes() {
+        const adBanners = document.querySelectorAll('.ad-banner');
+        for (const banner of adBanners) {
+            this.setAdSize(banner);
+        }
+    }
+
+    setAdSize(adElement) {
+        if (this.isMobile) {
+            adElement.style.maxWidth = '320px';
+            adElement.style.height = '50px';
+            adElement.textContent = 'Mobile Ad (320x50)';
+        } else if (this.isTablet) {
+            adElement.style.maxWidth = '468px';
+            adElement.style.height = '60px';
+            adElement.textContent = 'Tablet Ad (468x60)';
+        } else {
+            adElement.style.maxWidth = '728px';
+            adElement.style.height = '90px';
+            adElement.textContent = 'Desktop Ad (728x90)';
+        }
     }
 
     init() {
@@ -578,10 +685,28 @@ class AdManager {
         this.loadedAds.add(container);
         adElement.classList.add('ad-loading');
 
+        // Set appropriate size based on device
+        if (adElement.classList.contains('ad-banner')) {
+            this.setAdSize(adElement);
+        }
+
+        // Prevent layout shift by reserving space
+        this.preventLayoutShift(container, adElement);
+
         setTimeout(() => {
             adElement.classList.remove('ad-loading');
-            adElement.textContent = 'Advertisement Loaded';
+            if (adElement.classList.contains('ad-square')) {
+                adElement.textContent = 'Square Ad (300x250)';
+            }
         }, 1000);
+    }
+
+    preventLayoutShift(container, adElement) {
+        // Reserve space to prevent layout shift
+        const rect = adElement.getBoundingClientRect();
+        if (rect.height > 0) {
+            container.style.minHeight = `${rect.height}px`;
+        }
     }
 
     loadAllAds() {
@@ -603,12 +728,31 @@ class AdManager {
         container.appendChild(ad);
         return container;
     }
+
+    // Method to handle ad blocker detection
+    handleAdBlocker() {
+        const adContainers = document.querySelectorAll('.ad-container');
+        for (const container of adContainers) {
+            const adElement = container.querySelector('.ad-banner, .ad-square');
+            if (adElement && !adElement.offsetHeight) {
+                // Ad is likely blocked, hide container gracefully
+                container.style.display = 'none';
+            }
+        }
+    }
 }
 
 let adManager;
 
 document.addEventListener('DOMContentLoaded', function() {
     adManager = new AdManager();
+    
+    // Check for ad blockers after a short delay
+    setTimeout(() => {
+        if (adManager) {
+            adManager.handleAdBlocker();
+        }
+    }, 2000);
 });
 
 
