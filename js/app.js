@@ -523,39 +523,4 @@ function showLanding() {
     showLandingPage();
 }
 
-// ===========================
-// Sidebar Ads Management
-// ===========================
 
-function manageSidebarAds() {
-    const leftAd = document.querySelector('.sidebar-ad-left');
-    const rightAd = document.querySelector('.sidebar-ad-right');
-    const cta = document.querySelector('.cta-section');
-    const footer = document.querySelector('footer');
-    
-    if (!leftAd || !rightAd || !cta || !footer) return;
-    
-    const ctaTop = cta.getBoundingClientRect().top;
-    const footerTop = footer.getBoundingClientRect().top;
-    const windowHeight = window.innerHeight;
-    
-    // Hide ads when CTA or footer is in viewport
-    if (ctaTop < windowHeight || footerTop < windowHeight) {
-        leftAd.style.opacity = '0';
-        rightAd.style.opacity = '0';
-        leftAd.style.pointerEvents = 'none';
-        rightAd.style.pointerEvents = 'none';
-    } else {
-        leftAd.style.opacity = '1';
-        rightAd.style.opacity = '1';
-        leftAd.style.pointerEvents = 'auto';
-        rightAd.style.pointerEvents = 'auto';
-    }
-}
-
-// Run on scroll and on page load
-if (window.innerWidth >= 1600) {
-    window.addEventListener('scroll', manageSidebarAds);
-    window.addEventListener('resize', manageSidebarAds);
-    manageSidebarAds();
-}
