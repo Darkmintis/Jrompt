@@ -523,4 +523,83 @@ function showLanding() {
     showLandingPage();
 }
 
+// ===========================
+// Advertisement Management
+// ===========================
+
+class AdManager {
+    constructor() {
+        this.observer = null;
+        this.loadedAds = new Set();
+        this.init();
+    }
+
+    init() {
+        if ('IntersectionObserver' in window) {
+            this.observer = new IntersectionObserver(
+                this.handleIntersection.bind(this),
+                { threshold: 0.1, rootMargin: '50px' }
+            );
+            this.observeAds();
+        } else {
+            this.loadAllAds();
+        }
+    }
+
+    observeAds() {
+        const adContainers = document.querySelectorAll('.ad-container[data-lazy="true"]');
+        for (const container of adContainers) {
+            this.observer.observe(container);
+        }
+    }
+
+    handleIntersection(entries) {
+        for (const entry of entries) {
+            if (entry.isIntersecting && !this.loadedAds.has(entry.target)) {
+                this.loadAd(entry.target);
+                this.observer.unobserve(entry.target);
+            }
+        }
+    }
+
+    loadAd(container) {
+        const adElement = container.querySelector('.ad-banner, .ad-square');
+        if (!adElement) return;
+
+        this.loadedAds.add(container);
+        adElement.classList.add('ad-loading');
+
+        setTimeout(() => {
+            adElement.classList.remove('ad-loading');
+            adElement.textContent = 'Advertisement Loaded';
+        }, 1000);
+    }
+
+    loadAllAds() {
+        const adContainers = document.querySelectorAll('.ad-container');
+        for (const container of adContainers) {
+            this.loadAd(container);
+        }
+    }
+
+    static createAdContainer(type = 'banner', lazy = true) {
+        const container = document.createElement('div');
+        container.className = 'ad-container';
+        if (lazy) container.setAttribute('data-lazy', 'true');
+
+        const ad = document.createElement('div');
+        ad.className = type === 'square' ? 'ad-square' : 'ad-banner';
+        ad.textContent = type === 'square' ? 'Advertisement (300x250)' : 'Advertisement';
+
+        container.appendChild(ad);
+        return container;
+    }
+}
+
+let adManager;
+
+document.addEventListener('DOMContentLoaded', function() {
+    adManager = new AdManager();
+});
+
 
