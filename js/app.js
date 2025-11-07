@@ -372,19 +372,12 @@ function generateJSON() {
         AppState.answers[question.id] = input.value;
     }
     
-    // Create JSON object
-    const useCase = USE_CASES[AppState.selectedUseCase];
+    // Create clean JSON object with only prompt content
     const promptData = {
-        prompt: {
-            use_case: AppState.selectedUseCase,
-            use_case_name: useCase.name,
-            ...AppState.answers,
-            timestamp: new Date().toISOString(),
-            version: "1.0"
-        }
+        ...AppState.answers
     };
     
-    // Format JSON
+    // Format JSON with clean structure
     const jsonString = JSON.stringify(promptData, null, 2);
     
     // Show results
