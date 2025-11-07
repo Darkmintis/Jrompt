@@ -2,13 +2,13 @@
 
 <div align="center">
 
-![Jrompt Logo](assets/logo.png)
-
 **Transform Your Ideas Into Perfect JSON Prompts**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![GitHub stars](https://img.shields.io/github/stars/Darkmintis/Jrompt?style=social)](https://github.com/Darkmintis/Jrompt/stargazers)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
+[![Deploy Status](https://img.shields.io/badge/deploy-automated-success)](https://github.com/Darkmintis/Jrompt/actions)
+[![Live Site](https://img.shields.io/badge/live-darkmintis.dev%2Fjrompt-blue)](https://darkmintis.dev/jrompt)
 
 [Report Bug](https://github.com/Darkmintis/Jrompt/issues) | [Request Feature](https://github.com/Darkmintis/Jrompt/issues)
 
@@ -36,7 +36,11 @@ Perfect for developers, AI enthusiasts, and anyone who needs well-structured pro
 
 ## 🚀 Quick Start
 
-### Run Locally
+### 🌐 Live Demo
+
+Visit the live application at: **[darkmintis.dev/jrompt](https://darkmintis.dev/jrompt)**
+
+### 💻 Run Locally
 
 **Clone the repository:**
    ```bash
@@ -50,18 +54,26 @@ Perfect for developers, AI enthusiasts, and anyone who needs well-structured pro
    # No build process or dependencies required!
    ```
 
+### 🚀 Auto-Deployment
+
+This project automatically deploys to `darkmintis.dev/jrompt` on every push to the main branch via GitHub Actions.
+
 ## 📁 Project Structure
 
 ```
 Jrompt/
-│
-├── index.html          # Main HTML file (single-page app)
-├── style.css           # All styles and responsive design
-├── script.js           # Form logic, JSON generation, copy/download
-├── assets/             # Logo, icons, images
-│   └── logo.png        
-├── ads.txt             # Google AdSense verification
+├── index.html          # Main HTML file
+├── style.css           # Main styles and responsive design
+├── survey.css          # Survey-specific styles
+├── js/                 # JavaScript modules
+│   ├── app.js          # Main application logic
+│   ├── config.js       # Configuration
+│   └── use-cases/      # Use case modules
+├── .github/
+│   └── workflows/
+│       └── deploy.yml  # Auto-deployment workflow
 ├── README.md           # This file
+├── DEPLOYMENT.md       # Deployment guide
 ├── LICENSE             # MIT License
 └── CONTRIBUTING.md     # Contribution guidelines
 ```
@@ -83,18 +95,6 @@ Jrompt/
 5. **Copy or Download** - Use the copy button or download as a `.json` file
 6. **Use in Your AI Tool** - Paste the JSON into your favorite AI platform
 
----
-
-## 🛠️ Technology Stack
-
-| Layer | Technology | Why? |
-|-------|-----------|------|
-| **Frontend** | HTML5, CSS3, Vanilla JavaScript | Lightweight, fast, no dependencies |
-| **Styling** | CSS Grid, Flexbox | Responsive, modern layouts |
-| **Hosting** | GitHub Pages | Free, fast, reliable |
-| **License** | MIT | Open-source, contributor-friendly |
-
----
 
 ## 📊 Example Output
 
