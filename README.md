@@ -170,6 +170,7 @@ If you find Jrompt useful, please:
 - **Discussions:** [GitHub Discussions](https://github.com/Darkmintis/Jrompt/discussions)
 - **GitHub:** [@Darkmintis](https://github.com/Darkmintis)
 
+---
 
 <div align="center">
 
