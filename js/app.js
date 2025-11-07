@@ -458,19 +458,32 @@ function showCopySuccess() {
 
 function downloadJSON() {
     const jsonText = AppState.generatedJSON || document.getElementById('json-output').textContent;
+    
+    if (!jsonText) {
+        alert('No JSON to download. Please generate a prompt first.');
+        return;
+    }
+    
+    // Create blob and download link
     const blob = new Blob([jsonText], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     
-    const timestamp = new Date().toISOString().replaceAll(/[:.]/, '-').slice(0, -5);
-    const useCaseName = AppState.selectedUseCase.replaceAll('-', '_');
+    // Generate filename with timestamp
+    const timestamp = new Date().toISOString().replaceAll(/[:.]/g, '-').slice(0, -5);
+    const useCaseName = AppState.selectedUseCase ? AppState.selectedUseCase.replaceAll('-', '_') : 'prompt';
     link.download = `jrompt_${useCaseName}_${timestamp}.json`;
     link.href = url;
     
+    // Trigger download
     document.body.appendChild(link);
     link.click();
-    link.remove();
-    URL.revokeObjectURL(url);
+    
+    // Cleanup
+    setTimeout(() => {
+        link.remove();
+        URL.revokeObjectURL(url);
+    }, 100);
 }
 
 function createAnother() {
