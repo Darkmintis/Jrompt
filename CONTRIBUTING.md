@@ -57,8 +57,8 @@ Enhancement suggestions are tracked as GitHub issues. When creating an enhanceme
 
 2. **Clone your fork:**
    ```bash
-   git clone https://github.com/YOUR-USERNAME/Jrompt-JSON_Prompt_Generator.git
-   cd Jrompt-JSON_Prompt_Generator
+   git clone https://github.com/darkmintis/Jrompt.git
+   cd Jrompt
    ```
 
 3. **Create a branch:**
