@@ -1,85 +1,91 @@
 // ===========================
 // Image Generation Questions
+// Optimized for AI Art Tools (Midjourney, DALL-E, Stable Diffusion)
 // ===========================
 
 const IMAGE_GENERATION_QUESTIONS = [
     {
-        id: 'task',
-        question: 'What image do you want to create?',
-        description: 'Describe the image you want to generate. Be specific about the subject and scene.',
+        id: 'image_concept',
+        question: 'Describe your image vision',
+        description: 'Be extremely specific: subject, setting, action, atmosphere, and key details.',
         type: 'textarea',
-        placeholder: 'Example: Create a modern minimalist logo for a sustainable coffee brand featuring a coffee bean and leaf...',
+        placeholder: 'Example: A futuristic cyberpunk cityscape at sunset, neon-lit skyscrapers reflecting in rain-soaked streets, flying cars in the distance, a lone figure in a glowing jacket walking through the scene, cinematic lighting with purple and orange hues...',
         required: true
     },
     {
         id: 'art_style',
-        question: 'What art style do you prefer?',
-        description: 'Choose the visual style for your image.',
+        question: 'Visual style and medium?',
+        description: 'Choose the artistic approach for your image.',
         type: 'cards',
         options: [
-            { value: 'realistic', label: 'Realistic', icon: 'camera', description: 'Photo-realistic imagery' },
-            { value: 'minimalist', label: 'Minimalist', icon: 'circle', description: 'Simple and clean' },
-            { value: 'abstract', label: 'Abstract', icon: 'aperture', description: 'Artistic and conceptual' },
-            { value: 'cartoon', label: 'Cartoon', icon: 'smile', description: 'Playful and illustrated' },
-            { value: 'vintage', label: 'Vintage', icon: 'clock', description: 'Retro and classic' },
-            { value: '3d', label: '3D Render', icon: 'box', description: 'Three-dimensional look' }
+            { value: 'photorealistic-8k', label: 'Photorealistic', icon: 'camera', description: 'Ultra-realistic, 8K quality' },
+            { value: 'digital-art-detailed', label: 'Digital Art', icon: 'monitor', description: 'Polished digital painting' },
+            { value: 'oil-painting-classical', label: 'Oil Painting', icon: 'droplet', description: 'Traditional art style' },
+            { value: 'anime-manga-style', label: 'Anime/Manga', icon: 'smile', description: 'Japanese animation style' },
+            { value: '3d-render-octane', label: '3D Render', icon: 'box', description: 'Octane render, CGI' },
+            { value: 'minimalist-vector', label: 'Minimalist', icon: 'circle', description: 'Clean, simple, vector' },
+            { value: 'watercolor-artistic', label: 'Watercolor', icon: 'feather', description: 'Soft, flowing colors' },
+            { value: 'concept-art-detailed', label: 'Concept Art', icon: 'layers', description: 'Game/movie concept' }
         ],
         required: true
     },
     {
-        id: 'mood',
-        question: 'What mood should it convey?',
-        description: 'Choose the emotional feel of the image.',
+        id: 'lighting_atmosphere',
+        question: 'Lighting and atmosphere?',
+        description: 'Define the mood through lighting and environmental effects.',
         type: 'cards',
         options: [
-            { value: 'energetic', label: 'Energetic', icon: 'zap', description: 'Dynamic and vibrant' },
-            { value: 'calm', label: 'Calm', icon: 'cloud', description: 'Peaceful and serene' },
-            { value: 'professional', label: 'Professional', icon: 'briefcase', description: 'Corporate and sleek' },
-            { value: 'playful', label: 'Playful', icon: 'smile', description: 'Fun and lighthearted' },
-            { value: 'elegant', label: 'Elegant', icon: 'award', description: 'Sophisticated and refined' },
-            { value: 'bold', label: 'Bold', icon: 'shield', description: 'Strong and impactful' }
+            { value: 'golden-hour-warm', label: 'Golden Hour', icon: 'sun', description: 'Warm, soft, magical' },
+            { value: 'dramatic-cinematic', label: 'Dramatic', icon: 'film', description: 'High contrast, cinematic' },
+            { value: 'soft-diffused-natural', label: 'Soft Natural', icon: 'cloud', description: 'Even, gentle lighting' },
+            { value: 'neon-cyberpunk', label: 'Neon/Cyberpunk', icon: 'zap', description: 'Vibrant, glowing lights' },
+            { value: 'moody-dark-atmospheric', label: 'Moody Dark', icon: 'moon', description: 'Mysterious, shadowy' },
+            { value: 'studio-professional', label: 'Studio', icon: 'aperture', description: 'Professional, controlled' }
         ],
         required: true
     },
     {
-        id: 'colors',
-        question: 'Color preferences?',
-        description: 'Specify color scheme or palette.',
-        type: 'text',
-        placeholder: 'Example: Blue and gold, earth tones, monochrome, vibrant rainbow colors...',
-        required: true
-    },
-    {
-        id: 'composition',
-        question: 'Composition style?',
-        description: 'How should elements be arranged?',
-        type: 'cards',
-        options: [
-            { value: 'centered', label: 'Centered', icon: 'crosshair', description: 'Symmetrical and balanced' },
-            { value: 'dynamic', label: 'Dynamic', icon: 'trending-up', description: 'Diagonal and active' },
-            { value: 'minimalist', label: 'Minimalist', icon: 'minimize', description: 'Lots of negative space' },
-            { value: 'complex', label: 'Complex', icon: 'grid', description: 'Detailed and layered' }
-        ],
-        required: true
-    },
-    {
-        id: 'details',
-        question: 'Level of detail?',
-        description: 'How detailed should the image be?',
-        type: 'cards',
-        options: [
-            { value: 'simple', label: 'Simple', icon: 'circle', description: 'Basic shapes and forms' },
-            { value: 'moderate', label: 'Moderate', icon: 'layers', description: 'Balanced detail level' },
-            { value: 'intricate', label: 'Intricate', icon: 'cpu', description: 'Highly detailed' }
-        ],
-        required: true
-    },
-    {
-        id: 'context',
-        question: 'Any additional requirements?',
-        description: 'Add specific details or constraints (Optional).',
+        id: 'color_palette',
+        question: 'Color scheme and palette?',
+        description: 'Specify colors, tones, and color relationships.',
         type: 'textarea',
-        placeholder: 'Example: Must work on dark backgrounds, needs to be scalable, avoid specific elements...',
+        placeholder: 'Example: Vibrant purple and cyan with gold accents, high saturation, complementary color scheme, neon glow effects...',
+        required: true
+    },
+    {
+        id: 'composition_framing',
+        question: 'Composition and framing?',
+        description: 'How should the image be composed?',
+        type: 'cards',
+        options: [
+            { value: 'rule-of-thirds', label: 'Rule of Thirds', icon: 'grid', description: 'Balanced, professional' },
+            { value: 'centered-symmetrical', label: 'Centered', icon: 'crosshair', description: 'Symmetrical, focused' },
+            { value: 'dynamic-diagonal', label: 'Dynamic', icon: 'trending-up', description: 'Action, movement' },
+            { value: 'wide-angle-panoramic', label: 'Wide Angle', icon: 'maximize', description: 'Expansive view' },
+            { value: 'close-up-detailed', label: 'Close-up', icon: 'zoom-in', description: 'Intimate, detailed' },
+            { value: 'aerial-birds-eye', label: 'Aerial View', icon: 'navigation', description: 'Top-down perspective' }
+        ],
+        required: true
+    },
+    {
+        id: 'quality_details',
+        question: 'Quality and detail level?',
+        description: 'Technical specifications for the output.',
+        type: 'cards',
+        options: [
+            { value: 'ultra-detailed-8k', label: 'Ultra Detailed', icon: 'cpu', description: '8K, intricate details' },
+            { value: 'high-quality-4k', label: 'High Quality', icon: 'award', description: '4K, sharp, clear' },
+            { value: 'stylized-artistic', label: 'Stylized', icon: 'feather', description: 'Artistic interpretation' },
+            { value: 'simple-clean', label: 'Simple', icon: 'minimize', description: 'Clean, minimal detail' }
+        ],
+        required: true
+    },
+    {
+        id: 'technical_parameters',
+        question: 'Technical parameters and modifiers?',
+        description: 'Advanced settings: camera, lens, rendering, artistic influences.',
+        type: 'textarea',
+        placeholder: 'Example: Shot with Canon EOS R5, 85mm f/1.4 lens, shallow depth of field, bokeh background, trending on ArtStation, inspired by Simon Stålenhag, unreal engine 5, ray tracing, volumetric lighting...',
         required: false
     }
 ];

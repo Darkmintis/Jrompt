@@ -1,76 +1,49 @@
 // ===========================
 // Jrompt - Use Case Configuration
+// High-Quality AI Prompt Generation
 // ===========================
 
 const USE_CASES = {
     'text-content': {
-        name: 'Text Content Writing',
+        name: 'Content Writing',
         icon: 'file-text',
-        description: 'Blog posts, articles, essays, stories',
+        description: 'Articles, blogs, essays, and creative writing',
         color: '#3B82F6',
         scriptFile: 'text-content.js'
     },
-    'image-generation': {
-        name: 'Image Generation',
-        icon: 'image',
-        description: 'Logos, illustrations, art, designs',
-        color: '#EC4899',
-        scriptFile: 'image-generation.js'
-    },
-    'video-content': {
-        name: 'Video Content',
-        icon: 'video',
-        description: 'Video scripts, storyboards, concepts',
-        color: '#EF4444',
-        scriptFile: 'video-content.js'
-    },
-    'audio-content': {
-        name: 'Audio Content',
-        icon: 'mic',
-        description: 'Podcast scripts, voiceovers, audio',
-        color: '#8B5CF6',
-        scriptFile: 'audio-content.js'
-    },
     'code-programming': {
-        name: 'Code & Programming',
+        name: 'Code Generation',
         icon: 'code',
-        description: 'Scripts, functions, algorithms',
+        description: 'Functions, scripts, algorithms, and debugging',
         color: '#10B981',
         scriptFile: 'code-programming.js'
     },
-    'email-communication': {
-        name: 'Email & Communication',
-        icon: 'mail',
-        description: 'Professional emails, newsletters',
-        color: '#F59E0B',
-        scriptFile: 'email-communication.js'
+    'image-generation': {
+        name: 'Image Prompts',
+        icon: 'image',
+        description: 'AI art, logos, illustrations, and designs',
+        color: '#EC4899',
+        scriptFile: 'image-generation.js'
     },
-    'social-media': {
-        name: 'Social Media',
-        icon: 'share-2',
-        description: 'Posts, captions, engagement',
-        color: '#06B6D4',
-        scriptFile: 'social-media.js'
+    'marketing': {
+        name: 'Marketing Copy',
+        icon: 'trending-up',
+        description: 'Ads, campaigns, sales copy, and CTAs',
+        color: '#F43F5E',
+        scriptFile: 'marketing.js'
     },
     'data-analysis': {
         name: 'Data Analysis',
         icon: 'bar-chart',
-        description: 'Summaries, reports, insights',
+        description: 'Insights, reports, summaries, and patterns',
         color: '#6366F1',
         scriptFile: 'data-analysis.js'
     },
-    'marketing': {
-        name: 'Marketing Content',
-        icon: 'trending-up',
-        description: 'Ad copy, campaigns, promotions',
-        color: '#F43F5E',
-        scriptFile: 'marketing.js'
-    },
-    'education': {
-        name: 'Educational Content',
-        icon: 'book-open',
-        description: 'Tutorials, lessons, courses',
-        color: '#14B8A6',
-        scriptFile: 'education.js'
+    'business': {
+        name: 'Business & Strategy',
+        icon: 'briefcase',
+        description: 'Plans, proposals, strategies, and reports',
+        color: '#F59E0B',
+        scriptFile: 'business.js'
     }
 };

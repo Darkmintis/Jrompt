@@ -1,86 +1,89 @@
 // ===========================
-// Text Content Writing Questions
+// Content Writing Questions
+// Optimized for High-Quality AI Prompts
 // ===========================
 
 const TEXT_CONTENT_QUESTIONS = [
     {
-        id: 'task',
-        question: 'What do you want to write?',
-        description: 'Describe your writing goal in detail. Be specific for better results.',
+        id: 'objective',
+        question: 'What is your content goal?',
+        description: 'Be specific about what you want to achieve. The more detail, the better the AI output.',
         type: 'textarea',
-        placeholder: 'Example: Write a comprehensive blog post about sustainable living practices for urban dwellers, including practical tips and scientific research...',
+        placeholder: 'Example: Write an in-depth guide on sustainable living for urban professionals, covering practical daily habits, cost-benefit analysis, and environmental impact with data-backed insights...',
         required: true
     },
     {
         id: 'content_type',
-        question: 'What type of content?',
-        description: 'Select the format you need.',
+        question: 'Content format?',
+        description: 'Choose the structure that best fits your needs.',
         type: 'cards',
         options: [
-            { value: 'blog-post', label: 'Blog Post', icon: 'newspaper', description: 'Long-form article with sections' },
-            { value: 'essay', label: 'Essay', icon: 'pen-tool', description: 'Academic or formal writing' },
-            { value: 'story', label: 'Story', icon: 'book', description: 'Narrative or fiction' },
-            { value: 'tutorial', label: 'Tutorial', icon: 'graduation-cap', description: 'Step-by-step guide' },
-            { value: 'review', label: 'Review', icon: 'star', description: 'Product or service review' },
-            { value: 'listicle', label: 'Listicle', icon: 'list', description: 'List-based article' }
+            { value: 'article', label: 'Article', icon: 'newspaper', description: 'Structured long-form content' },
+            { value: 'guide', label: 'How-To Guide', icon: 'map', description: 'Step-by-step instructions' },
+            { value: 'listicle', label: 'Listicle', icon: 'list', description: 'Numbered or bulleted list' },
+            { value: 'essay', label: 'Essay', icon: 'pen-tool', description: 'Analytical or argumentative' },
+            { value: 'story', label: 'Story', icon: 'book', description: 'Narrative or creative' },
+            { value: 'review', label: 'Review', icon: 'star', description: 'Analysis and evaluation' }
         ],
         required: true
     },
     {
-        id: 'tone',
-        question: 'What tone should be used?',
-        description: 'Choose the writing style that fits your needs.',
+        id: 'tone_style',
+        question: 'Tone and voice?',
+        description: 'How should the AI communicate?',
         type: 'cards',
         options: [
-            { value: 'professional', label: 'Professional', icon: 'briefcase', description: 'Formal and business-appropriate' },
-            { value: 'casual', label: 'Casual', icon: 'coffee', description: 'Relaxed and conversational' },
-            { value: 'friendly', label: 'Friendly', icon: 'smile', description: 'Warm and approachable' },
-            { value: 'formal', label: 'Formal', icon: 'file-text', description: 'Academic or official' },
-            { value: 'humorous', label: 'Humorous', icon: 'laugh', description: 'Light and entertaining' },
-            { value: 'persuasive', label: 'Persuasive', icon: 'target', description: 'Convincing and compelling' }
+            { value: 'professional-authoritative', label: 'Professional', icon: 'briefcase', description: 'Expert and credible' },
+            { value: 'conversational-friendly', label: 'Conversational', icon: 'message-circle', description: 'Approachable and engaging' },
+            { value: 'educational-clear', label: 'Educational', icon: 'book-open', description: 'Clear and instructive' },
+            { value: 'persuasive-compelling', label: 'Persuasive', icon: 'target', description: 'Convincing and motivating' },
+            { value: 'storytelling-engaging', label: 'Storytelling', icon: 'feather', description: 'Narrative and captivating' },
+            { value: 'technical-precise', label: 'Technical', icon: 'cpu', description: 'Detailed and accurate' }
         ],
         required: true
     },
     {
-        id: 'audience',
-        question: 'Who is the target audience?',
-        description: 'Specify who will read this content.',
-        type: 'text',
-        placeholder: 'Example: Tech professionals, entrepreneurs, students, general public...',
-        required: true
-    },
-    {
-        id: 'length',
-        question: 'What length do you need?',
-        description: 'Choose the approximate word count.',
-        type: 'cards',
-        options: [
-            { value: 'short', label: 'Short', icon: 'minimize-2', description: '100-300 words' },
-            { value: 'medium', label: 'Medium', icon: 'maximize-2', description: '300-700 words' },
-            { value: 'long', label: 'Long', icon: 'maximize', description: '700-1500 words' },
-            { value: 'very-long', label: 'Very Long', icon: 'file-text', description: '1500+ words' }
-        ],
-        required: true
-    },
-    {
-        id: 'writing_style',
-        question: 'Preferred writing style?',
-        description: 'How should the content be structured?',
-        type: 'cards',
-        options: [
-            { value: 'descriptive', label: 'Descriptive', icon: 'eye', description: 'Detailed and vivid imagery' },
-            { value: 'narrative', label: 'Narrative', icon: 'book-open', description: 'Story-like flow' },
-            { value: 'expository', label: 'Expository', icon: 'info', description: 'Informative and clear' },
-            { value: 'persuasive', label: 'Persuasive', icon: 'message-circle', description: 'Argumentative approach' }
-        ],
-        required: true
-    },
-    {
-        id: 'context',
-        question: 'Any additional requirements?',
-        description: 'Add specific details, keywords, or constraints (Optional).',
+        id: 'target_audience',
+        question: 'Who is your audience?',
+        description: 'Define demographics, expertise level, and interests.',
         type: 'textarea',
-        placeholder: 'Example: Include scientific research, use simple language, avoid technical jargon, focus on practical tips...',
+        placeholder: 'Example: Tech-savvy millennials (25-35) interested in productivity, with intermediate knowledge of digital tools, looking for actionable advice...',
+        required: true
+    },
+    {
+        id: 'depth_length',
+        question: 'Content depth and length?',
+        description: 'Balance between comprehensiveness and readability.',
+        type: 'cards',
+        options: [
+            { value: 'quick-overview', label: 'Quick Read', icon: 'zap', description: '300-500 words, key points' },
+            { value: 'standard-depth', label: 'Standard', icon: 'file-text', description: '800-1200 words, balanced' },
+            { value: 'comprehensive', label: 'Comprehensive', icon: 'book', description: '1500-2500 words, detailed' },
+            { value: 'ultimate-guide', label: 'Ultimate Guide', icon: 'layers', description: '3000+ words, exhaustive' }
+        ],
+        required: true
+    },
+    {
+        id: 'key_elements',
+        question: 'Must-include elements?',
+        description: 'What specific components should the content have?',
+        type: 'cards',
+        options: [
+            { value: 'data-statistics', label: 'Data & Stats', icon: 'bar-chart', description: 'Numbers and research' },
+            { value: 'examples-case-studies', label: 'Examples', icon: 'file-text', description: 'Real-world cases' },
+            { value: 'actionable-steps', label: 'Action Steps', icon: 'check-square', description: 'Practical takeaways' },
+            { value: 'expert-quotes', label: 'Expert Insights', icon: 'message-square', description: 'Authority quotes' },
+            { value: 'comparisons', label: 'Comparisons', icon: 'git-compare', description: 'Pros vs cons' },
+            { value: 'visual-descriptions', label: 'Visual Aids', icon: 'image', description: 'Infographic-ready' }
+        ],
+        required: true
+    },
+    {
+        id: 'special_requirements',
+        question: 'Additional instructions?',
+        description: 'SEO keywords, constraints, style preferences, or specific requirements.',
+        type: 'textarea',
+        placeholder: 'Example: Include keywords "sustainable living" and "eco-friendly", avoid jargon, use short paragraphs, add FAQ section, optimize for featured snippets...',
         required: false
     }
 ];

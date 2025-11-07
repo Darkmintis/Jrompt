@@ -1,86 +1,97 @@
 // ===========================
-// Marketing Content Questions
+// Marketing Copy Questions
+// Optimized for High-Converting Marketing Content
 // ===========================
 
 const MARKETING_QUESTIONS = [
     {
-        id: 'task',
+        id: 'marketing_objective',
         question: 'What marketing content do you need?',
-        description: 'Describe the marketing material you want to create.',
+        description: 'Describe your product/service, target action, and desired outcome.',
         type: 'textarea',
-        placeholder: 'Example: Create ad copy for a new eco-friendly water bottle targeting environmentally conscious millennials...',
+        placeholder: 'Example: Create compelling ad copy for a premium productivity app targeting busy entrepreneurs, emphasizing time-saving features and ROI, with a focus on driving free trial signups...',
         required: true
     },
     {
-        id: 'marketing_goal',
-        question: 'Marketing goal?',
-        description: 'What is the primary objective?',
+        id: 'campaign_goal',
+        question: 'Primary campaign goal?',
+        description: 'What specific action do you want people to take?',
         type: 'cards',
         options: [
-            { value: 'awareness', label: 'Awareness', icon: 'eye', description: 'Build brand awareness' },
-            { value: 'conversion', label: 'Conversion', icon: 'shopping-cart', description: 'Drive sales' },
-            { value: 'engagement', label: 'Engagement', icon: 'heart', description: 'Increase engagement' },
-            { value: 'education', label: 'Education', icon: 'book-open', description: 'Educate audience' },
-            { value: 'retention', label: 'Retention', icon: 'users', description: 'Keep customers' }
+            { value: 'conversion-sales', label: 'Drive Sales', icon: 'shopping-cart', description: 'Purchase, subscribe' },
+            { value: 'lead-generation', label: 'Generate Leads', icon: 'user-plus', description: 'Signups, downloads' },
+            { value: 'brand-awareness', label: 'Build Awareness', icon: 'eye', description: 'Reach, impressions' },
+            { value: 'engagement-interaction', label: 'Boost Engagement', icon: 'heart', description: 'Likes, shares, comments' },
+            { value: 'traffic-clicks', label: 'Drive Traffic', icon: 'mouse-pointer', description: 'Website visits, clicks' }
         ],
         required: true
     },
     {
-        id: 'content_type',
-        question: 'Type of marketing content?',
-        description: 'Select the format you need.',
+        id: 'content_format',
+        question: 'Marketing format?',
+        description: 'Choose the type of marketing content.',
         type: 'cards',
         options: [
-            { value: 'ad-copy', label: 'Ad Copy', icon: 'megaphone', description: 'Advertising text' },
-            { value: 'product-description', label: 'Product Description', icon: 'tag', description: 'E-commerce copy' },
-            { value: 'landing-page', label: 'Landing Page', icon: 'layout', description: 'Website copy' },
-            { value: 'email-campaign', label: 'Email Campaign', icon: 'mail', description: 'Marketing email' },
-            { value: 'slogan', label: 'Slogan/Tagline', icon: 'type', description: 'Brand slogan' }
+            { value: 'ad-copy-short', label: 'Ad Copy', icon: 'megaphone', description: 'PPC, social ads' },
+            { value: 'landing-page-long', label: 'Landing Page', icon: 'layout', description: 'Sales page, conversion' },
+            { value: 'email-sequence', label: 'Email Series', icon: 'mail', description: 'Nurture, drip campaign' },
+            { value: 'product-description', label: 'Product Copy', icon: 'tag', description: 'E-commerce, features' },
+            { value: 'video-script', label: 'Video Script', icon: 'video', description: 'VSL, explainer' },
+            { value: 'social-post', label: 'Social Post', icon: 'share-2', description: 'Organic social content' }
         ],
         required: true
     },
     {
-        id: 'tone',
-        question: 'What tone should it have?',
-        description: 'Choose the brand voice.',
+        id: 'brand_voice',
+        question: 'Brand voice and tone?',
+        description: 'How should your brand communicate?',
         type: 'cards',
         options: [
-            { value: 'professional', label: 'Professional', icon: 'briefcase', description: 'Corporate and trustworthy' },
-            { value: 'friendly', label: 'Friendly', icon: 'smile', description: 'Warm and approachable' },
-            { value: 'bold', label: 'Bold', icon: 'zap', description: 'Confident and daring' },
-            { value: 'playful', label: 'Playful', icon: 'heart', description: 'Fun and creative' },
-            { value: 'luxury', label: 'Luxury', icon: 'award', description: 'Premium and exclusive' }
+            { value: 'authoritative-expert', label: 'Authoritative', icon: 'award', description: 'Expert, credible' },
+            { value: 'friendly-conversational', label: 'Friendly', icon: 'smile', description: 'Approachable, warm' },
+            { value: 'bold-disruptive', label: 'Bold', icon: 'zap', description: 'Edgy, provocative' },
+            { value: 'luxury-premium', label: 'Luxury', icon: 'star', description: 'Exclusive, sophisticated' },
+            { value: 'playful-creative', label: 'Playful', icon: 'heart', description: 'Fun, entertaining' },
+            { value: 'urgent-scarcity', label: 'Urgent', icon: 'clock', description: 'FOMO, time-sensitive' }
         ],
         required: true
     },
     {
-        id: 'target_audience',
-        question: 'Target audience?',
-        description: 'Who are you trying to reach?',
-        type: 'text',
-        placeholder: 'Example: Young professionals, parents, tech enthusiasts, small business owners...',
-        required: true
-    },
-    {
-        id: 'platform',
-        question: 'Marketing platform?',
-        description: 'Where will this be used?',
-        type: 'cards',
-        options: [
-            { value: 'social-media', label: 'Social Media', icon: 'share-2', description: 'Social platforms' },
-            { value: 'google-ads', label: 'Google Ads', icon: 'search', description: 'Search ads' },
-            { value: 'email', label: 'Email', icon: 'mail', description: 'Email marketing' },
-            { value: 'website', label: 'Website', icon: 'globe', description: 'Website content' },
-            { value: 'print', label: 'Print', icon: 'printer', description: 'Print materials' }
-        ],
-        required: true
-    },
-    {
-        id: 'context',
-        question: 'Any additional requirements?',
-        description: 'Add specific details or constraints (Optional).',
+        id: 'target_customer',
+        question: 'Target customer profile?',
+        description: 'Define demographics, psychographics, pain points, and desires.',
         type: 'textarea',
-        placeholder: 'Example: Include specific features, USPs, competitors to differentiate from, word limits...',
+        placeholder: 'Example: Busy entrepreneurs (30-45), earning $100K+, struggling with time management, desire work-life balance, tech-savvy, value efficiency over price, active on LinkedIn...',
+        required: true
+    },
+    {
+        id: 'unique_value',
+        question: 'Unique selling proposition (USP)?',
+        description: 'What makes your offer different and better?',
+        type: 'textarea',
+        placeholder: 'Example: Only productivity app with AI-powered task prioritization, saves 10+ hours/week, integrates with 50+ tools, 30-day money-back guarantee, used by Fortune 500 companies...',
+        required: true
+    },
+    {
+        id: 'copywriting_framework',
+        question: 'Copywriting approach?',
+        description: 'Choose the persuasion framework.',
+        type: 'cards',
+        options: [
+            { value: 'aida-classic', label: 'AIDA', icon: 'trending-up', description: 'Attention, Interest, Desire, Action' },
+            { value: 'pas-problem-solution', label: 'PAS', icon: 'alert-circle', description: 'Problem, Agitate, Solution' },
+            { value: 'fab-features-benefits', label: 'FAB', icon: 'check-circle', description: 'Features, Advantages, Benefits' },
+            { value: 'before-after-bridge', label: 'BAB', icon: 'git-compare', description: 'Before, After, Bridge' },
+            { value: 'storytelling-narrative', label: 'Storytelling', icon: 'book-open', description: 'Narrative, emotional' }
+        ],
+        required: true
+    },
+    {
+        id: 'special_instructions',
+        question: 'Additional requirements?',
+        description: 'Character limits, keywords, CTAs, competitors, or specific elements.',
+        type: 'textarea',
+        placeholder: 'Example: Include power words like "transform" and "breakthrough", max 150 characters for headline, CTA must be "Start Free Trial", differentiate from Asana and Trello, include social proof...',
         required: false
     }
 ];

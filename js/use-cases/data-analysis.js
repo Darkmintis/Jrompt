@@ -1,77 +1,95 @@
 // ===========================
 // Data Analysis Questions
+// Optimized for AI-Powered Data Insights
 // ===========================
 
 const DATA_ANALYSIS_QUESTIONS = [
     {
-        id: 'task',
-        question: 'What data analysis do you need?',
-        description: 'Describe the data and what insights you want to extract.',
+        id: 'analysis_objective',
+        question: 'What data insights do you need?',
+        description: 'Describe your data, the business question, and what decisions this will inform.',
         type: 'textarea',
-        placeholder: 'Example: Analyze sales data from Q4 2024 and identify trends, patterns, and recommendations...',
+        placeholder: 'Example: Analyze e-commerce sales data from Q4 2024 to identify top-performing products, customer segments with highest LTV, seasonal trends, and provide actionable recommendations to increase Q1 2025 revenue by 20%...',
         required: true
     },
     {
-        id: 'data_type',
-        question: 'What type of data?',
-        description: 'What kind of data are you working with?',
-        type: 'text',
-        placeholder: 'Example: Sales data, survey results, financial reports, user analytics, website metrics...',
+        id: 'data_context',
+        question: 'Data source and context?',
+        description: 'Describe the data: type, volume, time period, and relevant business context.',
+        type: 'textarea',
+        placeholder: 'Example: 50K transactions from Shopify, includes product categories, customer demographics, purchase history, average order value $85, operating in US market, B2C fashion retail...',
         required: true
     },
     {
-        id: 'analysis_depth',
-        question: 'Analysis depth?',
-        description: 'How detailed should the analysis be?',
+        id: 'analysis_type',
+        question: 'Type of analysis needed?',
+        description: 'What analytical approach should be used?',
         type: 'cards',
         options: [
-            { value: 'summary', label: 'Summary', icon: 'file-text', description: 'High-level overview' },
-            { value: 'detailed', label: 'Detailed', icon: 'search', description: 'In-depth analysis' },
-            { value: 'comprehensive', label: 'Comprehensive', icon: 'layers', description: 'Full breakdown with insights' }
+            { value: 'descriptive-trends', label: 'Descriptive', icon: 'bar-chart', description: 'What happened? Trends, patterns' },
+            { value: 'diagnostic-why', label: 'Diagnostic', icon: 'search', description: 'Why did it happen? Root causes' },
+            { value: 'predictive-forecast', label: 'Predictive', icon: 'trending-up', description: 'What will happen? Forecasts' },
+            { value: 'prescriptive-actions', label: 'Prescriptive', icon: 'target', description: 'What should we do? Recommendations' },
+            { value: 'comparative-benchmark', label: 'Comparative', icon: 'git-compare', description: 'How do we compare? Benchmarks' }
         ],
+        required: true
+    },
+    {
+        id: 'key_metrics',
+        question: 'Key metrics and KPIs?',
+        description: 'What specific metrics should be analyzed?',
+        type: 'textarea',
+        placeholder: 'Example: Revenue, conversion rate, customer acquisition cost (CAC), lifetime value (LTV), churn rate, average order value (AOV), return on ad spend (ROAS)...',
         required: true
     },
     {
         id: 'output_format',
-        question: 'Output format?',
-        description: 'How should the results be presented?',
+        question: 'Deliverable format?',
+        description: 'How should the analysis be presented?',
         type: 'cards',
         options: [
-            { value: 'report', label: 'Report', icon: 'file-text', description: 'Written report' },
-            { value: 'bullet-points', label: 'Bullet Points', icon: 'list', description: 'Key findings list' },
-            { value: 'narrative', label: 'Narrative', icon: 'book-open', description: 'Story format' },
-            { value: 'technical', label: 'Technical', icon: 'code', description: 'Technical analysis' },
-            { value: 'executive-summary', label: 'Executive Summary', icon: 'briefcase', description: 'For leadership' }
+            { value: 'executive-dashboard', label: 'Executive Summary', icon: 'briefcase', description: 'High-level, actionable' },
+            { value: 'detailed-report', label: 'Detailed Report', icon: 'file-text', description: 'Comprehensive analysis' },
+            { value: 'data-story', label: 'Data Story', icon: 'book-open', description: 'Narrative with insights' },
+            { value: 'technical-analysis', label: 'Technical', icon: 'cpu', description: 'Statistical, methodical' },
+            { value: 'visual-infographic', label: 'Visual', icon: 'image', description: 'Chart-heavy, visual' }
         ],
         required: true
     },
     {
-        id: 'focus_areas',
-        question: 'What should the analysis focus on?',
-        description: 'Specify key areas of interest.',
-        type: 'text',
-        placeholder: 'Example: Trends, correlations, outliers, predictions, recommendations...',
-        required: true
-    },
-    {
-        id: 'audience',
-        question: 'Who is the audience?',
-        description: 'Who will read this analysis?',
+        id: 'insights_focus',
+        question: 'What insights are most valuable?',
+        description: 'Prioritize the type of insights you need.',
         type: 'cards',
         options: [
-            { value: 'executives', label: 'Executives', icon: 'briefcase', description: 'C-level leadership' },
-            { value: 'technical', label: 'Technical Team', icon: 'code', description: 'Technical staff' },
-            { value: 'stakeholders', label: 'Stakeholders', icon: 'users', description: 'General stakeholders' },
-            { value: 'general', label: 'General Audience', icon: 'globe', description: 'Non-technical' }
+            { value: 'opportunities-growth', label: 'Opportunities', icon: 'trending-up', description: 'Growth potential' },
+            { value: 'problems-risks', label: 'Problems', icon: 'alert-triangle', description: 'Issues to address' },
+            { value: 'patterns-correlations', label: 'Patterns', icon: 'git-branch', description: 'Relationships, correlations' },
+            { value: 'anomalies-outliers', label: 'Anomalies', icon: 'alert-circle', description: 'Unusual patterns' },
+            { value: 'segments-clusters', label: 'Segments', icon: 'users', description: 'Customer groups' },
+            { value: 'predictions-forecasts', label: 'Forecasts', icon: 'activity', description: 'Future projections' }
         ],
         required: true
     },
     {
-        id: 'context',
-        question: 'Any additional requirements?',
-        description: 'Add specific details or constraints (Optional).',
+        id: 'audience_technical_level',
+        question: 'Audience and technical level?',
+        description: 'Who will use this analysis and what\'s their data literacy?',
+        type: 'cards',
+        options: [
+            { value: 'c-suite-strategic', label: 'C-Suite', icon: 'award', description: 'Strategic, high-level' },
+            { value: 'managers-tactical', label: 'Managers', icon: 'users', description: 'Tactical, actionable' },
+            { value: 'analysts-technical', label: 'Analysts', icon: 'cpu', description: 'Technical, detailed' },
+            { value: 'general-simple', label: 'General Team', icon: 'globe', description: 'Simple, accessible' }
+        ],
+        required: true
+    },
+    {
+        id: 'special_requirements',
+        question: 'Specific requirements or constraints?',
+        description: 'Statistical methods, visualization preferences, comparison periods, or other needs.',
         type: 'textarea',
-        placeholder: 'Example: Include visualizations, compare to previous periods, highlight specific metrics...',
+        placeholder: 'Example: Compare to previous quarter and same period last year, include confidence intervals, suggest A/B test ideas, highlight statistical significance, provide SQL queries for replication...',
         required: false
     }
 ];
