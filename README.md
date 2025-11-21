@@ -172,26 +172,6 @@ If you find Jrompt useful, please:
 
 ---
 
-## 🎨 Roadmap
-
-- [ ] Dark mode toggle
-- [ ] Save favorite templates
-- [ ] Multi-language support
-- [ ] Export to multiple formats (YAML, TOML, etc.)
-- [ ] Prompt template library
-- [ ] Browser extension version
-- [ ] API endpoint for programmatic access
-
----
-
-## 👏 Acknowledgments
-
-- Built with ❤️ by [Darkmintis](https://github.com/Darkmintis)
-- Inspired by the need for better AI prompt management
-- Thanks to all contributors and users!
-
----
-
 <div align="center">
 
 **Made with ❤️ by [Darkmintis](https://github.com/Darkmintis)**
